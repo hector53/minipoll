@@ -181,10 +181,10 @@
 
             
             <div class="div-block-10">
-              <button class="submit-button-3 w-button">Notificarme por Email</button>
+              <button class="buttonN blue">Notificarme por Email</button>
                 
                 <a href="{{encuesta.3}}+"  class="link-2" v-if="resultados ==  false">Directo a los Resultados</a>
-                <a class="link-2" @click="cancelarVoto" v-if="resultados">Cancelar Mi Voto</a>
+                <a class="link-2" @click="cancelarVoto" v-if="resultados && yaVote ">Cancelar Mi Voto</a>
               </div>
           
         </div>

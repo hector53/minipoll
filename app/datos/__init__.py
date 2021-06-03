@@ -1,4 +1,5 @@
 #datos produccion
+
 datos = {
    "host":"localhost",
     "database":"minipoll",
@@ -6,6 +7,8 @@ datos = {
     "userPass":"nacho*123",
 }
 url_site = "minipoll.jemyxs2xli-zqy3jz1yy6kg.p.runcloud.link"
+
+
 
 #datos localhost
 """

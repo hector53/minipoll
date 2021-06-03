@@ -2,7 +2,7 @@ body {
     font-family: 'Space Grotesk', sans-serif;
     color: #222;
     font-weight: 400;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .company {
@@ -56,7 +56,6 @@ body {
 .text-block-14 {
     color: #59b1ff;
     position: absolute;
-    margin-left: -20px;
 }
 .nav-bar {
     padding-top: 21px;
@@ -64,7 +63,7 @@ body {
 }
 
 .section-hero {
-    padding-top: 75px;
+    padding-top: 60px;
     padding-bottom: 20px;
     background-color: #fff;
     text-align: center;
@@ -89,8 +88,8 @@ body {
 .crear-producto {
     position: relative;
     border-style: solid;
-    border-width: 8px;
-    border-color: rgba(0, 0, 0, 0.2);
+    border-width: 6px;
+    border-color: rgba(0, 0, 0, 0.08);
     border-radius: 15px;
     background-color: rgba(0, 0, 0, 0.05);
     cursor: pointer;
@@ -164,16 +163,39 @@ margin-bottom: 48px;
 background-color: #6d7280;
 color: white;
 }
-.button{
-display: inline-block;
-margin-right: 8px;
-margin-left: 8px;
-border-radius: 5px;
-color: #fff;
-font-size: 16px;
-text-align: center;
-text-decoration: none;
-text-transform: uppercase;
+.buttonN{
+    display: inline-block;
+    margin-right: 8px;
+    margin-left: 8px;
+    padding: 14px 29px;
+    border-radius: 5px;
+    background-color: #6d7280;
+    -webkit-transition: background-color 300ms ease;
+    transition: background-color 300ms ease;
+    font-family: 'Space Grotesk', sans-serif;
+    color: #fff;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+}
+.buttonN:hover{
+    background-color: #848a9c;
+    color: #fff
+}
+.blue{
+    background-color: #59b1ff;
+    font-family: 'Space Grotesk', sans-serif;
+}
+.blue:hover{
+    background-color: #4a99df;
+}
+.isFlexCenter{
+    display: flex;
+    justify-content: center;
+    text-align: center;
 }
 .is-gray{
 background-color: #6d7280!important;
