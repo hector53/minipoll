@@ -1,0 +1,72 @@
+{% extends 'copia.html' %}
+{% block title %}
+Inicio
+{% endblock %}
+{% block content %}
+
+<section class="section">
+  <div class="container is-poll has-text-centered">
+      <div class="box is-brand-box">
+          <h1 class="title is-3">Editando Encuesta</h1>
+              <div class="block">
+                  <div class="field">
+                      <div class="control has-icons-left  is-clearfix">
+                          <input type="text"  class="input" id="pregunta" v-model="preguntaEncuesta" 
+                          placeholder="¿Cual es tu pregunta?" required="" autofocus="">
+                       
+                      </div>
+                  </div>
+                  <div class="field" v-for="(item, index) in opcionEncuesta" :key="index">
+
+                        <div v-if="opcionEncuesta[index]['siVote'] == 0">
+                            <input type="text" class="input inputPadding" v-model="opcionEncuesta[index]['opcion']"
+                            :placeholder="'opcion ' + (index+1)" required="">
+                            <a  class="close close_option"
+                            @click="reducirOpciones(index)"
+                            >  </a>
+                        </div>  
+                        <div v-else>
+                            <label type="text" class="input inputPadding" v-text="opcionEncuesta[index]['opcion']"
+                            :placeholder="'opcion ' + (index+1)" disabled></label>
+
+                            <a  class="close close_option"
+                            @click="reducirOpciones(index)"
+                            >  </a>
+                        </div>  
+                
+
+                      </div>
+
+                      <div class="field" v-for="(item2, index2) in opcionEncuestaNuevo" :key="index2+100">
+
+                        <input type="text" class="input inputPadding" v-model="opcionEncuestaNuevo[index2]"
+                            placeholder="Opción nueva" required="">
+                        <a  class="close close_option"
+                            @click="reducirOpcionesNuevo(index2)"
+                            >
+                </a>
+
+                    </div>
+                      <p>
+                        <span class="button is-secondary " @click="addOpcion">Agregar</span>
+                      </p>
+                  </div>
+              </div>
+              <!---->
+              <div class="field">
+                  <button class="button is-primary is-fullwidth" @click="crearEncuesta">
+                      Editar Encuesta
+                  </button>
+              </div>
+        
+
+
+      </div>
+</section>
+
+{% endblock %}
+
+
+{% block vuejs %}
+<script src="{{ url_for('static', filename='js/editar_encuesta.js') }}"></script>
+{% endblock %}

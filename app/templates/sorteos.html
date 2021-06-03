@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block title %}Sorteos{% endblock %}
+{% block metas %}
+<meta name="description" content="Crea encuestas rápidas en segundos no necesita registro">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@site">
+<meta name="twitter:creator" content="@fastpoll">
+<meta property="og:url" content="{{linkSite}}">
+<meta property="og:title" content="Sorteos - Encuestas Rápidas ">
+<meta property="og:description" content="Crea sorteos rápidos en segundos no necesita registro">
+<meta property="og:image" content="{{ url_for('static', filename='img/faviconwhite.png') }}">
+<meta property="og:image:alt" content="Eventist banner">
+<meta property="og:site_name" content="Eventist">
+<link rel="canonical" href="{{linkSite}}encuesta">
+{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock %}
+{% block content %}
+<div id="app">
+    <section class="section-hero">
+        <div class="container">
+            <h1 class="headingM has-text-left">Sorteos</h1>
+
+            <h3 class="headingM has-text-left">Lista de participantes</h3>
+            <textarea class="textarea" v-model="participantes" id="participantes" placeholder="Participantes linea por linea" rows="10"></textarea>
+            <h3 class="headingM has-text-left mt-3">Número de Premios</h3>
+            <div class="control">
+                <input class="input" type="number" v-model="premios" placeholder="Cantidad de Premios">
+              </div>
+              <div class="button-group">
+                <button class="button is-info " @click="Sortear">Sortear</button>
+                <button class="button is-info is-gray " @click="borrarNombres">Borrar Participantes</button>
+            </div>
+
+
+            <nav class="panel" v-if="ganadores" style="    margin-bottom: 40px;">
+                <p class="panel-heading headingM">
+                    Resultados del Sorteo
+                </p>
+                <a class="panel-block is-active" v-for="(item, index) in arrayGanadores"
+                 :key="index"
+                 v-text="'Puesto '+(index+1)+': '+item"
+                 >
+                  
+                </a>
+
+               
+              </nav>
+        </div>
+    </section>
+</div>
+
+{% endblock %}
+
+{% block vuejs %}
+<script src="{{ url_for('static', filename='js/sorteos.js') }}"></script>
+{% endblock %}

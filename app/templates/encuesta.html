@@ -1,0 +1,217 @@
+{% extends 'base.html' %}
+{% block title %}{{encuesta.1}}{% endblock %}
+{% block metas %}
+<meta name="description" content="{{meta}}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@site">
+<meta name="twitter:creator" content="@fastpoll">
+{% if resultado == 1 %}
+<meta property="og:url" content="{{linkSite}}{{encuesta.3}}+">
+{% else %}
+<meta property="og:url" content="{{linkSite}}{{encuesta.3}}">
+{% endif %}
+
+
+
+<meta property="og:title" content="{{encuesta.1}} - Fastpoll">
+<meta property="og:description" content="{{meta}}">
+{% if resultado == 1 %}
+<meta property="og:image" content="{{linkSite+'static/img/captures/captureR_'+encuesta.3+'.jpg'}}">
+{% else %}
+<meta property="og:image" content="{{linkSite+'static/img/captures/capture_'+encuesta.3+'.jpg'}}">
+{% endif %}
+
+<meta property="og:image:alt" content="fastpoll banner">
+<meta property="og:site_name" content="FastPoll">
+{% if resultado == 1 %}
+<link rel="canonical" href="{{linkSite}}{{encuesta.3}}+">
+{% else %}
+<link rel="canonical" href="{{linkSite}}{{encuesta.3}}">
+{% endif %}
+
+
+
+{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock %}
+{% block content %}
+{% if resultado == 1 %}
+<link itemprop="thumbnailUrl" href="{{linkSite+'static/img/captures/captureR_'+encuesta.3+'.jpg'}}">
+<span itemprop="thumbnail" itemscope itemtype="http://schema.org/ImageObject">
+  <link itemprop="url" href="{{linkSite+'static/img/captures/captureR_'+encuesta.3+'.jpg'}}">
+</span>
+{% else %}
+<link itemprop="thumbnailUrl" href="{{linkSite+'static/img/captures/capture_'+encuesta.3+'.jpg'}}">
+<span itemprop="thumbnail" itemscope itemtype="http://schema.org/ImageObject">
+  <link itemprop="url" href="{{linkSite+'static/img/captures/capture_'+encuesta.3+'.jpg'}}">
+</span>
+{% endif %}
+
+
+<div id="app">
+  <button class="button is-info btnAtajos modal-button" data-target="#modal"><i class="fa fa-info-circle"
+      aria-hidden="true"></i></button>
+  <div id="modal" class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+      <div class="box">
+        <h1 class="title is-3 mt-3">Atajos de Página</h1>
+        <ul>
+
+          <li> <b>Votar:</b> Puedes votar presionando la tecla del numero correspondiente </li>
+          <li><b>Ejemplo para votar por la opción 1:</b> Pulse la tecla <kbd>1</kbd> </li>
+          <li><b>Cancelar Voto: </b>Pulse la tecla <kbd>C</kbd> </li>
+          <li><b>Pra copiar la url: </b>Pulse la tecla <kbd>U</kbd> </li>
+          <li><b>Pra copiar el #codigo: </b>Pulse la tecla <kbd>H</kbd> </li>
+
+        </ul>
+
+      </div>
+    </div>
+    <button class="modal-close is-large" aria-label="close"></button>
+  </div>
+  <section class="section-hero" style="    min-height: 500px; padding: 5px;" >
+    <div class="container" >
+      <h1 class="headingM has-text-left">{{encuesta.1}}</h1>
+      <p class="hero-subhead has-text-left" v-text="'Realizado hace 11 horas por Anonimo '+totalVotos+' votos'" ></p>
+
+      <div style="padding: 10px;     text-align: left;" >
+        <div class="text-block-8" @click="mostrarQr">
+          
+          <i class="fa fa-arrow-down" v-if="qrCode"   aria-hidden="true"></i>
+          <i class="fa fa-arrow-right" v-else  aria-hidden="true"></i>
+          
+          &nbsp;Compartir con código QR</div>
+        <div class="div-block-11" v-if="qrCode"  >
+          <div>
+            <div class="text-block-9"># {{encuesta.3}}</div>
+            <div class="text-block-10" @click="copyLink('{{linkSite}}{{encuesta.3}}', 1)">Copiar la url completa</div>
+          </div><img
+          src="{{ url_for('static', filename='img/qr/QR_'+encuesta.3+'.png') }}"
+            loading="lazy" alt="" class="image-2">
+        </div>
+      </div>
+
+      <div class="mt-5" id="seccionEncuesta" style="display: none;">
+        <div class="w-form" style="padding: 10px;">
+          
+
+
+          <div 
+          v-for="(item, index) in opciones" :key="index"
+          @click="votar(item['id'])"
+          :class="{'activeOption': miVoto == item['id']}"
+          >
+            <div class="CubOption" v-if="resultados"
+            :style="'border-color:'+colores[item['color']]"
+          >
+       
+
+            <div class="columns">
+              <div class="column is-flex is-justify-content-space-between">
+
+                <div class="cubreIconandOption is-flex">
+                  <div class="div-block-8">
+                    <div class="div-block-9" v-if="item['porcentaje'] > 0 && miVoto == item['id']" ></div>
+                  </div>
+                  <span for="Opción " class="radio-button-label w-form-label" v-text="item['valor']"  ></span>
+                </div>
+                <div class="text-block-12" v-if="resultados" v-text="item['porcentaje']+'%'"  ></div>
+              </div>
+            </div>
+
+            <div class="columns" v-if="resultados">
+              <div class="column is-flex is-justify-content-space-between">
+                <div class="cubreResult is-flex">
+                  <div class="poll-bar"  >
+                    <div class="fill-bar" :style="'width:'+item['porcentaje']+'%; background-color:'+colores[index]+';'" ></div>
+                  </div>
+                  <div class="text-block-12" v-text="item['totalVoto']+' voto'"   style="    font-size: 15px;"  >
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="CubOption" v-else
+        >
+     
+
+          <div class="columns">
+            <div class="column is-flex is-justify-content-space-between">
+
+              <div class="cubreIconandOption is-flex">
+                <div class="div-block-8">
+                  <div class="div-block-9" v-if="item['porcentaje'] > 0 && miVoto == item['id']" ></div>
+                </div>
+                <span for="Opción " class="radio-button-label w-form-label" v-text="item['valor']"  ></span>
+              </div>
+              <div class="text-block-12" v-if="resultados" v-text="item['porcentaje']+'%'"  ></div>
+            </div>
+          </div>
+
+          <div class="columns" v-if="resultados">
+            <div class="column is-flex is-justify-content-space-between">
+              <div class="cubreResult is-flex">
+                <div class="poll-bar"  >
+                  <div class="fill-bar" :style="'width:'+item['porcentaje']+'%; background-color:'+colores[index]+';'" ></div>
+                </div>
+                <div class="text-block-12" v-text="item['totalVoto']+' voto'"   style="    font-size: 15px;"  >
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+          </div>
+          
+
+
+
+
+
+
+
+            
+         
+
+            
+            <div class="div-block-10">
+              <button class="submit-button-3 w-button">Notificarme por Email</button>
+                
+                <a href="{{encuesta.3}}+"  class="link-2" v-if="resultados ==  false">Directo a los Resultados</a>
+                <a class="link-2" @click="cancelarVoto" v-if="resultados">Cancelar Mi Voto</a>
+              </div>
+          
+        </div>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+{% endblock %}
+
+
+{% block vuejs %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.js" integrity="sha512-aMGMvNYu8Ue4G+fHa359jcPb1u+ytAF+P2SCb+PxrjCdO3n3ZTxJ30zuH39rimUggmTwmh2u7wvQsDTHESnmfQ==" crossorigin="anonymous"></script>
+<script src="{{ url_for('static', filename='js/canvas.js') }}"></script>
+<script src="{{ url_for('static', filename='js/get_encuesta.js') }}"></script>
+<script>
+  $(".modal-button").click(function () {
+    console.log("asdasd")
+    var target = $(this).data("target");
+    $("html").addClass("is-clipped");
+    $(target).addClass("is-active");
+  });
+
+  $(".modal-close").click(function () {
+    $("html").removeClass("is-clipped");
+    $(this).parent().removeClass("is-active");
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block title %}Inicio{% endblock %}
+{% block metas %}
+<meta name="description" content="Crea encuestas rápidas en segundos no necesita registro">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@site">
+<meta name="twitter:creator" content="@fastpoll">
+<meta property="og:url" content="{{linkSite}}">
+<meta property="og:title" content="Crear Encuesta - Encuestas Rápidas ">
+<meta property="og:description" content="Crea encuestas rápidas en segundos no necesita registro">
+<meta property="og:image" content="{{ url_for('static', filename='img/faviconwhite.png') }}">
+<meta property="og:image:alt" content="Eventist banner">
+<meta property="og:site_name" content="Eventist">
+<link rel="canonical" href="{{linkSite}}encuesta">
+{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock %}
+{% block content %}
+<div id="app">
+    <section class="section-hero">
+        <div class="container">
+            <div class="div-block-5"><a href="/" class="link"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a></div>
+            <h1 class="headingM has-text-left">Crear una encuesta</h1>
+            <p class="hero-subhead has-text-left">Completa los campos de aquí debajo para publicar tu encuesta</p>
+            <div class="form-block w-form has-text-left">
+                    <div class="div-block-4">
+                        <label for="name" class="field-label has-text-left">Pregunta o título</label>
+                        <input
+                            type="text" class="text-field title w-input" maxlength="256" 
+                            id="pregunta" v-model="preguntaEncuesta" 
+                            placeholder="Ej. ¿Cuál es tu color favorito?" ></div>
+    
+                    <div class="divR" v-for="(item, index) in opcionEncuesta" :key="index">
+                        <label :for="'opcion'+index" class="field-label has-text-left" v-text="'opcion ' + (index+1)"></label>
+                        <input type="text"
+                        class="text-field w-input" maxlength="256" 
+                        v-model="opcionEncuesta[index]"
+                        placeholder="Ingrese su opción aquí" required="">
+                        <a  class="close close_option"
+                        v-show="opcionEncuesta.length > 2" @click="reducirOpciones(index)"
+                        ></a>
+                    </div>
+                   
+                    <div class="text-block-5"  @click="addOpcion">+ Agregar otra opción</div>
+                    <div class="button-group">
+                        <button class="button is-info " @click="crearEncuesta">PUBLICAR</button>
+                        <button class="button is-info is-gray ">OPCIONES AVANZADAS</button>
+                    </div>
+                   
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock %}
+
+{% block vuejs %}
+<script src="{{ url_for('static', filename='js/base.js') }}"></script>
+{% endblock %}

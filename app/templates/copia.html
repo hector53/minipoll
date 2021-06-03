@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title> {% block title %} {% endblock %} - Encuestas Rápidas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{{ url_for('static', filename='img/favicon.ico') }}" rel="shortcut icon">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200&display=swap" rel="stylesheet">
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    {% block metas %} {% endblock %}
+    <link href="{{ url_for('static', filename='css/copia.css') }}" rel="stylesheet">
+    {% block css %} {% endblock %}
+    <script type=text/javascript> $SCRIPT_ROOT={{ request.script_root|tojson|safe }}; </script> </head> <body>
+        <div id="wrapper">
+        <div id="header">
+            <nav class="navbar" role="navigation" aria-label="main navigation">
+                <div class="navbar-brand mr-2">
+                    <a class="navbar-item" href="/">
+                        <img src="{{ url_for('static', filename='img/fastpoll.png') }}" />
+                    </a>
+
+                    <a role="button" class="navbar-burger burger" :class="NavbarMenuisOpen"
+                        aria-label="menu" >
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </a>
+                </div>
+
+                <div class="navbar-menu is-hidden-desktop menuPhone " :class="NavbarMenuisOpen">
+                    <div class="navbar-start">
+                        <div class="my-4">
+                            <a class="navbar-item title is-5 my-2" href="/">Crea una encuesta</a>
+                        </div>
+
+                        <div class="navbar-item is-hidden-desktop">
+                            <a href="/panel" class="button is-light is-fullwidth title is-5">Panel</a>
+                        </div>
+                       
+                    </div>
+                </div>
+
+                <div class="navbar-menu">
+                    <div class="navbar-start">
+                        <a class="navbar-item" href="/">Crea una encuesta</a>
+                    </div>
+
+                    <div class="navbar-end" v-cloak>
+                        <div class="navbar-item">
+                            <div class="buttons">
+                                <a href="/panel" class="button is-light">Panel</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+        </div>
+
+        <div id="app">
+
+            <div id="index">
+                {% block content %}
+    
+                  {% endblock %}
+                
+            </div>
+
+        </div>
+      
+
+
+        <footer id="footer">
+           
+            <div class="footer-bottom is-flex-tablet" style="justify-content: space-between;">
+                <div class="field">
+                    Desarrollado por canalizados.com
+                </div>
+                <div class="is-flex-tablet">
+                    <div class="field mr-4">Copyright &copy; 2021 Fastpoll</div>
+                   
+                </div>
+            </div>
+        </footer>
+
+    </div>
+  
+    <script src="{{ url_for('static', filename='js/vue.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/sweet2.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/axios.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/overlay.js') }}"></script>
+    <script>
+        var narBarPhone = false
+        $(".navbar-burger ").click(function () {
+            console.log(narBarPhone)
+            if (narBarPhone) {
+                console.log("ocultar nan")
+                narBarPhone = false
+                $(".navbar-burger ").removeClass("is-active");
+                $(".menuPhone").hide();
+            } else {
+                console.log("mostrar nan")
+                narBarPhone = true
+                $(".navbar-burger ").addClass("is-active");
+                $(".menuPhone").show();
+            }
+
+        });
+    </script>
+    {% block vuejs %} {% endblock %}
+
+    </body>
+
+</html>

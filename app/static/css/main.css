@@ -1,0 +1,67 @@
+.close_option{
+    position: absolute;
+    right: -10px;
+    margin-top: -38px;
+}
+.cubreOpcion{
+    margin: 20px 0px;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    -webkit-box-align: center;
+    align-items: center;
+    box-shadow: rgb(0 0 0 / 12%) 0px 8px 30px;
+
+}
+
+.cubreOpcion:hover{
+    cursor: pointer;
+    box-shadow: rgb(0 0 0 / 12%) 0px 30px 60px;
+}
+
+.opcionProgress{
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+}
+
+.opcionNum{
+    font-weight: 500;
+    margin: unset;
+    padding: 0px 18px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    float: left;
+    vertical-align: middle;
+    line-height: inherit;
+    box-sizing: border-box;
+}
+.opcionPorcentaje{
+    font-size: 14px;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    font-weight: 700;
+    margin: unset;
+    padding: 0px 18px 0px 0px;
+    white-space: nowrap;
+    vertical-align: middle;
+    text-align: center;
+    line-height: inherit;
+    box-sizing: border-box;
+    z-index: 100;
+}
+
+.encuesta_votacion{
+    position: relative;
+    height: 100%;
+    background: rgb(0, 112, 243);
+    top: -50px;
+    left: 0px;
+    opacity: 0.5;
+    transition: width 0.5s ease 0s;
+    border-radius: 10px;
+}

@@ -1,0 +1,204 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block metas %}
+<meta name="description" content="Crea encuestas rápidas en segundos no necesita registro">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@site">
+<meta name="twitter:creator" content="@fastpoll">
+<meta property="og:url" content="{{linkSite}}">
+<meta property="og:title" content="Crear Encuesta - Encuestas Rápidas ">
+<meta property="og:description" content="Crea encuestas rápidas en segundos no necesita registro">
+<meta property="og:image" content="{{ url_for('static', filename='img/faviconwhite.png') }}">
+<meta property="og:image:alt" content="Eventist banner">
+<meta property="og:site_name" content="Eventist">
+<link rel="canonical" href="{{linkSite}}encuesta">
+{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock %}
+{% block content %}
+<div id="app">
+  <div id="sinEncuestas" style="display: none;">
+    <p>No ha realizado ninguna encuesta</p>
+  </div>
+  <div id="loader">
+
+  </div>
+
+  <section class="section-hero" style="display: none;">
+    <div class="container">
+      <div class="div-block-5"><a href="/" class="link"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a>
+      </div>
+      <h1 class="headingM has-text-left">Dashboard</h1>
+      <p class="hero-subhead has-text-left">Estadisticas</p>
+
+      <div class="columns p-2 ">
+        <div class="column " >
+          <div class="pollBlock cubreDiv">
+            <div class="pollIcon">
+              <i class="fa fa-bars faIconPoll" aria-hidden="true"></i>
+            </div>
+            <h3 class="pollNumber" v-text="cantEncuestas" ></h3>
+            <p class="pollsText">Polls</p>
+          </div>
+        </div>
+        <div class="column">
+          <div class="pollBlock cubreDiv">
+            <div class="pollIcon">
+              <i class="fa fa-check faIconPoll" aria-hidden="true"></i>
+            </div>
+            <h3 class="pollNumber" v-text="cantVotos"  ></h3>
+            <p class="pollsText">Votes</p>
+          </div>
+        </div>
+        <div class="column">
+
+        </div>
+
+      </div>
+
+      <div class="columns " style="    margin-top: 60px;">
+        <div class="column is-3">
+            <a href="/crear">
+                <div class="crear-producto">
+                    <div class="div-block-2">
+                        <div class="text-block"><strong class="bold-text">ENCUESTA SIMPLE<br></strong></div>
+                        <div class="text-block-2">Creá opciones simples</div>
+                    </div>
+                    <div class="tag is-danger">
+                        <div class="text-block-3">GRATIS</div>
+                    </div>
+                </div>
+            </a>
+            
+    </div>
+
+        <div class="column is-3">
+            <div class="crear-producto">
+                <div class="div-block-2">
+                    <div class="text-block"><strong class="bold-text">Q&A<br></strong></div>
+                    <div class="text-block-2">Hace preguntas,
+                        obtené respuestas</div>
+                </div>
+                <div class="tag is-danger">
+                    <div class="text-block-3">GRATIS</div>
+                </div>
+            </div>
+        </div>
+        <div class="column is-3">
+            <div class="crear-producto">
+                <div class="div-block-2">
+                    <div class="text-block"><strong class="bold-text">Dia y Hora<br></strong></div>
+                    <div class="text-block-2">Coordiná la mejor fecha de encuentro</div>
+                </div>
+                <div class="tag is-danger">
+                    <div class="text-block-3">GRATIS</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="column is-3">
+            <div class="crear-producto">
+                <div class="div-block-2">
+                    <div class="text-block"><strong class="bold-text">NUBE DE PALABRAS <br></strong></div>
+                    <div class="text-block-2">Preguntá y recibí todo tipo de respuestas </div>
+                </div>
+                <div class="tag is-info">
+                    <div class="text-block-3">REGISTRO</div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <div class="columns ">
+        <div class="column is-3">
+            <div class="crear-producto">
+                <div class="div-block-2">
+                    <div class="text-block"><strong class="bold-text">RATING<br></strong></div>
+                    <div class="text-block-2">Obtené respuestas númericas.</div>
+                </div>
+                <div class="tag is-info">
+                    <div class="text-block-3">REGISTRO</div>
+                </div>
+            </div>
+        </div>
+        <div class="column is-3">
+            <a href="/sorteos">
+            <div class="crear-producto">
+                <div class="div-block-2">
+                    <div class="text-block"><strong class="bold-text">SORTEOS<br></strong></div>
+                    <div class="text-block-2">Realizá sorteos para redes</div>
+                </div>
+                <div class="tag is-info">
+                    <div class="text-block-3">REGISTRO</div>
+                </div>
+            </div>
+            </a>
+        </div>
+        <div class="column is-3">
+            <div class="crear-producto">
+                <div class="div-block-2">
+                    <div class="text-block"><strong class="bold-text">QUIZZ<br></strong></div>
+                    <div class="text-block-2">Evaluá conocimiento</div>
+                </div>
+                <div class="tag is-success">
+                    <div class="text-block-3">PRO</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="column is-3">
+            <div class="crear-producto">
+                <div class="div-block-2">
+                    <div class="text-block"><strong class="bold-text">Trivia<br></strong></div>
+                    <div class="text-block-2">Coming Soon
+                    </div>
+                </div>
+                <div class="tag is-success">
+                    <div class="text-block-3">PRO</div>
+                </div>
+            </div>
+        </div>
+        
+        
+
+    </div>
+
+
+      <h1 class="headingM has-text-left" style="    margin-bottom: 40px;">Your Polls</h1>
+      <div v-for="(item, index) in misEncuestas" :key="index" >
+       <a :href="'/'+item['codigo']+'+'" style="color: #222;">
+        <div class="CubOption cubreDiv">
+          <div class="columns">
+            <div class="column is-flex is-justify-content-space-between">
+              <div class="cubreIconandOption is-flex has-text-left">
+                <span for="Opción " class="radio-button-label w-form-label" v-text="item['pregunta']" ></span>
+              </div>
+              <div class="text-block-12" v-text="item['cantVoto']+' Votes'" ></div>
+            </div>
+          </div>
+          <div class="columns">
+            <div class="column is-flex is-justify-content-space-between">
+              <div class="cubreResult is-flex is-justify-content-space-between">
+                <span v-text="item['fecha']"></span>
+                <div>
+                  <span><a :href="'/'+item['codigo']+'/edit'" ><i class="fa fa-pencil-square" style="font-size: 20px;" aria-hidden="true"></i></a></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+       </a>
+       
+        
+      </div>
+
+    </div>
+  </section>
+</div>
+
+{% endblock %}
+
+{% block vuejs %}
+<script src="{{ url_for('static', filename='js/get_panel.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %} - Poll</title>
+    {% block metas %} {% endblock %}
+    <link href="{{ url_for('static', filename='img/faviconR.png') }}" rel="shortcut icon">
+    <link href="{{ url_for('static', filename='img/faviconR.png') }}" rel="apple-touch-icon">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Varela+Round&display=swap" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/copia.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/poll.css') }}" rel="stylesheet">
+    {% block css %} {% endblock %}
+    <script type=text/javascript> $SCRIPT_ROOT={{ request.script_root|tojson|safe }}; </script> </head> <body>
+       {% if index %}
+        <div class="notification-bar">
+                <div class="container-2 w-container">
+                        <div class="text-block-13">Entrar a un evento?</div>
+                        <div class="text-block-14">#</div>
+                        <div id="appB">
+                        <input type="text" class="div-block-13" v-model="codigoBuscador" @keyup.enter="buscarEncuesta" />
+                        </div>
+                       </div>
+        </div>
+        {% endif %}
+    <header class="nav-bar">
+        <div class="container" style="max-width: 940px;">
+            <nav class="navbar" role="navigation" aria-label="main navigation">
+                <div class="navbar-brand mr-2 is-flex is-align-items-center">
+                   <a href="/" class=" is-flex is-align-items-center"><div class="logotipo"><div class="logotipo-fill"></div></div>
+                    <div class="company">eventist</div></a>
+                    
+                    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
+                        data-target="navbarBasicExample">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </a>
+
+                </div>
+
+                <div class="navbar-menu is-hidden-desktop menuPhone " :class="NavbarMenuisOpen">
+                    <div class="navbar-start">
+                        <div class="my-4">
+                            <a class="navbar-item title is-5 my-2" href="/">PRODUCTOS</a>
+                        </div>
+                        <div class="my-4">
+                            <a class="navbar-item title is-5 my-2" href="/">PRECIOS</a>
+                        </div>
+
+                        <div class="navbar-item is-hidden-desktop">
+                            <a href="/panel" class="button is-light is-fullwidth title is-5">ENTRAR</a>
+                            <a href="/panel" class="button is-light is-fullwidth title is-5">REGISTRO</a>
+                            <a href="/dashboard" class="button is-light is-fullwidth title is-5">DARSHBOARD</a>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="navbar-menu">
+
+
+                    <div class="navbar-end">
+                        <a class="navbar-item">
+                            PRODUCTOS
+                        </a>
+                        <a class="navbar-item">
+                            PRECIOS
+                        </a>
+                        <div class="navbar-item">
+                            <div class="buttons">
+                                <a class="button is-info" style="font-size: 14px; background-color:#59b1ff">
+                                    ENTRAR
+                                </a>
+                                <a class="button is-info" style="font-size: 14px; background-color:#59b1ff">
+                                    REGISTRO
+                                </a>
+                                <a class="button is-info" href="/dashboard" style="font-size: 14px; background-color:#59b1ff">
+                                    DASHBOARD
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+        </div>
+    </header>
+
+    {% block content %}{% endblock %}
+
+    <footer class="section-footer">
+        <div class="w-container">
+            <div class="columns">
+                <div class="column">
+                   
+                    <div class="div-block-16">
+                        <a href="/" class=" is-flex is-align-items-center"><div class="logotipo-dark"><div class="logotipo-fill"></div></div>
+                            <div class="company">eventist</div></a>
+                    </div>
+                   
+                    <div class="div-block-15"><a href="#" class="social-icon w-inline-block"><img src="https://uploads-ssl.webflow.com/60b13cec71296d20a8aa5bf0/60b13cec71296d43d2aa5c12_14-social-email.png" width="20" alt=""></a><a href="#" target="_blank" class="social-icon w-inline-block"><img src="https://uploads-ssl.webflow.com/60b13cec71296d20a8aa5bf0/60b13cec71296d0b0faa5c13_14-social-facebook.png" width="20" alt=""></a><a href="#" target="_blank" class="social-icon w-inline-block"><img src="https://uploads-ssl.webflow.com/60b13cec71296d20a8aa5bf0/60b13cec71296de436aa5c15_14-social-twitter.png" width="20" alt=""></a></div>
+                  
+                </div>
+                <div class="column" >
+                    <h3 class="heading-2">Producto</h3><a href="#" class="link-3">FAQ</a><a href="#" class="link-3">Plantillas</a><a href="#" class="link-3">Integraciones</a><a href="#" class="link-3">Nosotros</a><a href="#" class="link-3">Soporte</a>
+                </div>
+
+                <div class="column">
+                    <h3 class="heading-2">Cuenta</h3><a href="#" class="link-3">Mis eventos</a><a href="#" class="link-3">Precios</a><a href="#" class="link-3">Políticas de privacidad</a><a href="#" class="link-3">Términos y condiciones</a>
+                </div>
+              
+              </div>
+        </div>
+    </footer>
+    <script src="{{ url_for('static', filename='js/vue.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/sweet2.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/axios.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/overlay.js') }}"></script>
+
+    <script>
+        var narBarPhone = false
+        $(".navbar-burger ").click(function () {
+            console.log(narBarPhone)
+            if (narBarPhone) {
+                console.log("ocultar nan")
+                narBarPhone = false
+                $(".navbar-burger ").removeClass("is-active");
+                $(".menuPhone").hide();
+            } else {
+                console.log("mostrar nan")
+                narBarPhone = true
+                $(".navbar-burger ").addClass("is-active");
+                $(".menuPhone").show();
+            }
+
+        });
+    </script>
+     {% if index %}
+    <script src="{{ url_for('static', filename='js/buscador.js') }}"></script>
+    {% endif %}
+    {% block vuejs %} {% endblock %}
+    </body>
+
+</html>
