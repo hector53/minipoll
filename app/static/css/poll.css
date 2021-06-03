@@ -192,11 +192,7 @@ color: white;
 .blue:hover{
     background-color: #4a99df;
 }
-.isFlexCenter{
-    display: flex;
-    justify-content: center;
-    text-align: center;
-}
+
 .is-gray{
 background-color: #6d7280!important;
 }
@@ -831,6 +827,11 @@ input[type="checkbox"], input[type="radio"] {
     .section-hero {
         padding-left: 10px;
         padding-right: 10px;
+    }
+    .isFlexCenter{
+        display: flex;
+        justify-content: center;
+        text-align: center;
     }
 }
 
