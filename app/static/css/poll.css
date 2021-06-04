@@ -817,6 +817,28 @@ input[type="checkbox"], input[type="radio"] {
     margin-bottom: 300px;
     padding: 10px;
 }
+.cubreLoader{
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.miLoader{
+    -webkit-animation: spinAround 700ms infinite linear;
+    animation: spinAround 700ms infinite linear;
+    font-size: 30px!important;
+    color: #59b1ff;
+}
+.cubreRegister{
+    display: flow-root;
+    max-width: 400px!important;
+}
+.buttonLang{
+    margin-left: 10px;
+    border: none;
+    margin-top: 5px;
+    color: #8a92a7;
+}
 @media screen and (max-width: 767px)
 {
     .circle {

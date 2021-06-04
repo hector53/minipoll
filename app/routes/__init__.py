@@ -1,11 +1,12 @@
-from flask import render_template,  request, jsonify,  redirect, make_response
+from flask import render_template,  request, jsonify,  redirect, url_for, make_response, session
 from app import app
 from app.schemas import getDataOne, getData
 from app.datos import url_site
+from app.lang import idioma
 import uuid
 import datetime
 expire_date = datetime.datetime.now()
-expire_date = expire_date + datetime.timedelta(days=90)
+expire_date = expire_date + datetime.timedelta(days=10000)
 
 """
 @app.before_request
@@ -14,50 +15,133 @@ def before_request():
         url = request.url.replace('http://', 'https://', 1)
         code = 301
         return redirect(url, code=code)"""
-        
+
 @app.route("/")
 def index():
-        username = request.cookies.get('uPoll')
-        if username:
-                #existe la cookie no la creo 
-                return render_template('index.html', linkSite=url_site, index=1)
+        lang = request.cookies.get('resultAppLang')
+        if 'loggedin' in session:
+                userR = 1
+                if lang:
+                        return render_template('index.html', idioma=idioma[int(lang)], linkSite=url_site, index=1, userR=userR)
+                else:
+                        resp = make_response(render_template('index.html', idioma=idioma[0], linkSite=url_site, index=1, userR=userR))
+                        resp.set_cookie('resultAppLang', 0, expires=expire_date)
+                        return resp
         else:
-                #no existe la creo 
-                resp = make_response(render_template('index.html', linkSite=url_site, index=1))
-                resp.set_cookie('uPoll', uuid.uuid4().hex, expires=expire_date)
-                return resp
-
+                userR = 0
+                username = request.cookies.get('uPoll')
+                if username:
+                        #existe la cookie no la creo 
+                        if lang:
+                                return render_template('index.html',   idioma=idioma[int(lang)], linkSite=url_site, index=1, userR=userR)
+                        else:
+                                resp = make_response(render_template('index.html',  idioma=idioma[0], linkSite=url_site, index=1, userR=userR))
+                                resp.set_cookie('resultAppLang', '0', expires=expire_date)
+                                return resp
+                else:
+                        #no existe la creo 
+                        if lang:
+                                resp = make_response(render_template('index.html',  idioma=idioma[int(lang)], linkSite=url_site, index=1, userR=userR))
+                                resp.set_cookie('uPoll', uuid.uuid4().hex, expires=expire_date)
+                                return resp
+                        else:
+                                resp = make_response(render_template('index.html',  idioma=idioma[0], linkSite=url_site, index=1, userR=userR))
+                                resp.set_cookie('uPoll', uuid.uuid4().hex, expires=expire_date)
+                                resp.set_cookie('resultAppLang', 0, expires=expire_date)
+                                return resp
+                                
 @app.route("/crear")
 def crear():
-        username = request.cookies.get('uPoll')
-        if username:
-                #existe la cookie no la creo 
-                return render_template('encuestaSimple.html', linkSite=url_site)
+        lang = request.cookies.get('resultAppLang')
+        if lang:
+                print("no la creo")
         else:
-                #no existe la creo 
-                resp = make_response(render_template('encuestaSimple.html', linkSite=url_site))
-                resp.set_cookie('uPoll', uuid.uuid4().hex, expires=expire_date)
-                return resp
+                print("la creo")
+                crear_cookie_idioma()
+                lang = request.cookies.get('resultAppLang')
+        
+        if 'loggedin' in session:
+                userR = 1
+                return render_template('encuestaSimple.html', idioma=idioma[int(lang)], linkSite=url_site,  userR=userR)
+        else:
+                userR = 0
+                username = request.cookies.get('uPoll')
+                if username:
+                        #existe la cookie no la creo 
+                        return render_template('encuestaSimple.html', idioma=idioma[int(lang)], linkSite=url_site,  userR=userR)
+                else:
+                        #no existe la creo 
+                        resp = make_response(render_template('encuestaSimple.html', idioma=idioma[int(lang)], linkSite=url_site,  userR=userR))
+                        resp.set_cookie('uPoll', uuid.uuid4().hex, expires=expire_date)
+                        return resp
 
 @app.route("/sorteos")
 def sorteos():
-        return render_template('sorteos.html', linkSite=url_site)
+        lang = request.cookies.get('resultAppLang')
+        if lang:
+                print("no la creo")
+        else:
+                print("la creo")
+                crear_cookie_idioma()
+                lang = request.cookies.get('resultAppLang')
+        
+        if 'loggedin' in session:
+                userR = 1
+                return render_template('sorteos.html', idioma=idioma[int(lang)], linkSite=url_site, userR=userR)
+        else:
+                userR = 0
+                return render_template('sorteos.html', idioma=idioma[int(lang)],  linkSite=url_site, userR=userR)
          
+
+def crear_cookie_idioma():
+        resp = make_response(render_template('setCookie.html'))
+        resp.set_cookie('resultAppLang', '0', expires=expire_date)
+        return resp
+
 
 @app.route("/dashboard")
 def panel():
-        username = request.cookies.get('uPoll')
-        if username:
-                #existe la cookie no la creo 
-                return render_template('panel.html')
+        lang = request.cookies.get('resultAppLang')
+        if lang:
+                print("no la creo")
         else:
-                #no existe la creo 
-                resp = make_response(render_template('panel.html'))
-                resp.set_cookie('uPoll', uuid.uuid4().hex, expires=expire_date)
-                return resp
+                print("la creo")
+                crear_cookie_idioma()
+                lang = request.cookies.get('resultAppLang')
+        
+        if 'loggedin' in session:
+                userR = 1
+                return render_template('panel.html', userR=userR, idioma=idioma[int(lang)])
+        else:
+                userR = 0
+                username = request.cookies.get('uPoll')
+                if username:
+                        #existe la cookie no la creo 
+                        return render_template('panel.html', userR=userR, idioma=idioma[int(lang)] )
+                else:
+                        #no existe la creo 
+                        resp = make_response(render_template('panel.html', userR=userR, idioma=idioma[int(lang)]))
+                        resp.set_cookie('uPoll', uuid.uuid4().hex, expires=expire_date)
+                        return resp
 
-@app.route("/<string:codigo>")
+        
+
+@app.route("/p/<string:codigo>")
 def vista_encuesta(codigo):
+        lang = request.cookies.get('resultAppLang')
+        if lang:
+                print("no la creo")
+        else:
+                print("la creo")
+                crear_cookie_idioma()
+                lang = request.cookies.get('resultAppLang')
+        
+        if 'loggedin' in session:
+                userR = 1
+                miUid = session['id_user']
+        else:
+                userR = 0
+                miUid = request.cookies.get('uPoll')
         CodigoR = codigo[0:5]
         print("el codigo es", CodigoR)
         resultado = codigo[-1:]
@@ -66,7 +150,7 @@ def vista_encuesta(codigo):
                 resultado = 1
         else:
                 resultado = 0
-        miUid = request.cookies.get('uPoll')
+        
         sql = f"SELECT * FROM encuesta where cod = '{CodigoR}'  " 
 
         #buscar por uid las encuestas q tenga en la db 
@@ -115,28 +199,83 @@ def vista_encuesta(codigo):
                         mio = 1
                 else:
                         mio = 0
-                if miUid:
+                if userR==1:
                         #existe la cookie no la creo 
-                        return render_template("encuesta.html", encuesta=encuesta, linkSite=url_site, mio=mio, meta=descripcionMeta, resultado=resultado)
+                        return render_template("encuesta.html", idioma=idioma[int(lang)], userR=userR, encuesta=encuesta, linkSite=url_site, mio=mio, meta=descripcionMeta, resultado=resultado)
                 else:
-                        #no existe la creo 
-                        resp = make_response(render_template("encuesta.html", encuesta=encuesta, linkSite=url_site, mio=mio, meta=descripcionMeta, resultado=resultado))
-                        resp.set_cookie('uPoll', uuid.uuid4().hex, expires=expire_date)
-                        return resp
+                        if miUid:
+                                return render_template("encuesta.html", idioma=idioma[int(lang)],  userR=userR, encuesta=encuesta, linkSite=url_site, mio=mio, meta=descripcionMeta, resultado=resultado)
+                        else:
+                                resp = make_response(render_template("encuesta.html", idioma=idioma[int(lang)],  userR=userR, encuesta=encuesta, linkSite=url_site, mio=mio, meta=descripcionMeta, resultado=resultado))
+                                resp.set_cookie('uPoll', uuid.uuid4().hex, expires=expire_date)
+                                return resp
         else:
                 return redirect("/", code=302)
 
 
-@app.route("/<string:codigo>/edit")
+@app.route("/p/<string:codigo>/edit")
 def editar_encuesta(codigo):
-        username = request.cookies.get('uPoll')
+        lang = request.cookies.get('resultAppLang')
+        if lang:
+                print("no la creo")
+        else:
+                print("la creo")
+                crear_cookie_idioma()
+                lang = request.cookies.get('resultAppLang')
+        
+        if 'loggedin' in session:
+                userR = 1
+                username = session['id_user']
+        else:
+                userR = 0
+                username = request.cookies.get('uPoll')
         sql = f"SELECT * FROM encuesta where cod = '{codigo}' and id_user = '{username}'  " 
         #buscar por uid las encuestas q tenga en la db 
         encuesta = getDataOne(sql)
         if encuesta:
-                return render_template("edit_encuesta.html", encuesta=encuesta)
+                return render_template("edit_encuesta.html", idioma=idioma[int(lang)], userR=userR, encuesta=encuesta)
         else:
                 return redirect("/", code=302)
 
+
+#user
+@app.route("/signup")
+def signup():
+        lang = request.cookies.get('resultAppLang')
+        if lang:
+                print("no la creo")
+        else:
+                print("la creo")
+                crear_cookie_idioma()
+                lang = request.cookies.get('resultAppLang')
+        
+        if 'loggedin' in session:
+                return redirect("/dashboard", code=302)
+        else:
+                return render_template('user/signup.html', idioma=idioma[int(lang)])
+
+@app.route("/login")
+def login():
+        lang = request.cookies.get('resultAppLang')
+        if 'loggedin' in session:
+                return redirect("/dashboard", code=302)
+        else:
+                
+                if lang:
+                        return render_template('user/login.html', idioma=idioma[int(lang)])
+                else:
+                        resp = make_response(render_template('user/login.html',  idioma=idioma[0]))
+                        resp.set_cookie('resultAppLang', '0', expires=expire_date)
+                        return resp
+
+
+                
+
+@app.route('/logout')
+def logout():
+   session.pop('loggedin', None)
+   session.pop('id_user', None)
+   session.pop('username', None)
+   return redirect(url_for('login'))
 
      

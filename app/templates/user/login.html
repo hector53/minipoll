@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block title %}Login{% endblock %}
+{% block metas %}
+<meta name="description" content="Crea encuestas rápidas en segundos no necesita registro">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@site">
+<meta name="twitter:creator" content="@fastpoll">
+<meta property="og:url" content="{{linkSite}}">
+<meta property="og:title" content="Signup - Result.app ">
+<meta property="og:description" content="Crea encuestas rápidas en segundos no necesita registro">
+<meta property="og:image" content="{{ url_for('static', filename='img/faviconwhite.png') }}">
+<meta property="og:image:alt" content="Eventist banner">
+<meta property="og:site_name" content="Eventist">
+<link rel="canonical" href="{{linkSite}}encuesta">
+{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock %}
+{% block content %}
+<div id="app">
+    <section class="section-hero">
+        <div class="container cubreRegister">
+            <h1 class="headingM ">Login</h1>
+            <p class="hero-subhead ">Securely login to your account</p>
+            <div class="form-block w-form " style="text-align: center;">
+    
+                    <div class="divR" >
+
+
+
+                        <input type="text" id="email" v-model="email"
+                        @keyup.enter="Login"
+                        class="text-field w-input" maxlength="50" 
+                        placeholder="Email Address" required="">
+                      
+                        <input type="password" id="pass" v-model="pass"
+                        class="text-field w-input" maxlength="50" 
+                        @keyup.enter="Login"
+                        placeholder="Password" required="">
+                    </div>
+                   
+                    <div class="button-group">
+                        <button class="buttonN blue " @click="Login" >Login</button>
+                    </div>
+                   
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock %}
+
+{% block vuejs %}
+<script src="{{ url_for('static', filename='js/login.js') }}"></script>
+{% endblock %}

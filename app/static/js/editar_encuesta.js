@@ -114,7 +114,7 @@ var app = new Vue({
     mounted: function(){    
  var pathname = window.location.pathname; 
       if(pathname != '/'){
-          var param = pathname.substr(1,5)
+          var param = pathname.substr(3,7)
           this.codigoEncuesta = param
           this.getEncuesta(param)
       }

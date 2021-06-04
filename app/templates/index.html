@@ -18,20 +18,19 @@ content="Crea encuestas rápidas en segundos no necesita registro">
 {% block content %}
 <section class="section-hero">
     <div class="container">
-        <h1 class="hero-heading">Creá preguntas gratis,<br>obtené respuestas en tiempo real</h1>
-        <p class="hero-subhead">Encuestas, Q&amp;A, AMA, Quizzes y más. Sin registro, es 100% gratuito and toma
-            menos de un minuto.<br></p>
+        <h1 class="hero-heading">{{idioma.headlineHero}}<br>{{idioma.headlineHero2}}</h1>
+        <p class="hero-subhead">{{idioma.subheadHero}}</p>
 
         <div class="columns " style="    margin-top: 60px;">
             <div class="column is-3">
                 <a href="/crear">
                     <div class="crear-producto">
                         <div class="div-block-2">
-                            <div class="text-block"><strong class="bold-text">ENCUESTA SIMPLE<br></strong></div>
-                            <div class="text-block-2">Creá opciones simples</div>
+                            <div class="text-block"><strong class="bold-text">{{idioma.pollHeadBlock}}<br></strong></div>
+                            <div class="text-block-2">{{idioma.pollSubBlock}}</div>
                         </div>
                         <div class="tag is-danger">
-                            <div class="text-block-3">GRATIS</div>
+                            <div class="text-block-3">{{idioma.tagGratis}}</div>
                         </div>
                     </div>
                 </a>
@@ -41,23 +40,22 @@ content="Crea encuestas rápidas en segundos no necesita registro">
             <div class="column is-3">
                 <div class="crear-producto">
                     <div class="div-block-2">
-                        <div class="text-block"><strong class="bold-text">Q&A<br></strong></div>
-                        <div class="text-block-2">Hace preguntas,
-                            obtené respuestas</div>
+                        <div class="text-block"><strong class="bold-text">{{idioma.qaHeadBlock}}<br></strong></div>
+                        <div class="text-block-2">{{idioma.qaSubBlock}}</div>
                     </div>
                     <div class="tag is-danger">
-                        <div class="text-block-3">GRATIS</div>
+                        <div class="text-block-3">{{idioma.tagGratis}}</div>
                     </div>
                 </div>
             </div>
             <div class="column is-3">
                 <div class="crear-producto">
                     <div class="div-block-2">
-                        <div class="text-block"><strong class="bold-text">Dia y Hora<br></strong></div>
-                        <div class="text-block-2">Coordiná la mejor fecha de encuentro</div>
+                        <div class="text-block"><strong class="bold-text">{{idioma.dateHeadBlock}}<br></strong></div>
+                        <div class="text-block-2">{{idioma.dateSubBlock}}</div>
                     </div>
                     <div class="tag is-danger">
-                        <div class="text-block-3">GRATIS</div>
+                        <div class="text-block-3">{{idioma.tagGratis}}</div>
                     </div>
                 </div>
             </div>
@@ -130,8 +128,8 @@ content="Crea encuestas rápidas en segundos no necesita registro">
         </div>
 
         <div class="button-group">
-            <a href="/crear" class="buttonN blue ">CREAR YA</a>
-            <a href="/dashboard" class="buttonN ">CARACTERÍSTICAS</a>
+            <a href="/dashboard" class="buttonN blue ">{{idioma.buttonHero}}</a>
+            <a href="/dashboard" class="buttonN ">{{idioma.buttonSubHero}}</a>
         </div>
 
         <img src="{{ url_for('static', filename='img/portada2.png') }}"

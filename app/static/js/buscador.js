@@ -25,7 +25,7 @@ var app = new Vue({
                console.log(response)
                $.LoadingOverlay("hide");
                if(response.status != 0){
-                location.href = '/'+response.codigo
+                location.href = '/p/'+response.codigo
                }else{
                  Swal.fire({
                    icon: 'error',

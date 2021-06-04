@@ -135,12 +135,14 @@ var app = new Vue({
         $("#seccionEncuesta").show();
       },
      async votar(id){
+      $.LoadingOverlay("show");
         await axios.get($SCRIPT_ROOT + '/_votar_',  {
             params: {
               id_opcion: id, 
               id_encuesta: this.id_encuesta
             }
           }).then((response) => {
+            $.LoadingOverlay("hide");
             if(response.data.result ==  1){
                
                   this.resultados = true
@@ -157,7 +159,7 @@ var app = new Vue({
                   this.actualizaVoto = false
             }
 
-            if(response.data.result ==  0){
+            if(response.data.result ==  3){
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
@@ -165,6 +167,18 @@ var app = new Vue({
                   })
                   this.actualizaVoto = false
             }
+            if(response.data.result ==  0){
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Ya tienes un usuario registrado en este dispositivo debes iniciar sesion',
+                confirmButtonText: `OK`,
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  location.href = '/login'
+                }
+              })
+          }
             
           });
 
@@ -209,7 +223,8 @@ var app = new Vue({
                   }
 
                   
-                  $("#seccionEncuesta").show();
+                  $(".cubreEncuesta").show();
+                  $(".cubreLoader").hide();
 
                   if(response.data.encuesta[5]==0){
                     this.capturar = 1
@@ -313,7 +328,7 @@ var app = new Vue({
       window.addEventListener('keyup', this.detectaTecla)  
       var pathname = window.location.pathname; 
       if(pathname != '/'){
-          var param = pathname.substr(1)
+          var param = pathname.substr(3)
           this.codigoEncuesta = param
          await this.getEncuesta(param)
           if(this.capturar == 1){

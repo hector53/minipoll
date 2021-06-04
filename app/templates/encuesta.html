@@ -33,7 +33,7 @@
 
 {% endblock %}
 {% block css %}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 {% endblock %}
 {% block content %}
 {% if resultado == 1 %}
@@ -72,7 +72,13 @@
     <button class="modal-close is-large" aria-label="close"></button>
   </div>
   <section class="section-hero" style="    min-height: 500px; padding: 5px;" >
-    <div class="container" >
+    <div class="cubreLoader" >
+      <span ><i class="fa fa-spinner miLoader" aria-hidden="true"></i></span>
+    </div>
+    
+    <div class="container cubreEncuesta" style="display: none;">
+      
+      
       <h1 class="headingM has-text-left">{{encuesta.1}}</h1>
       <p class="hero-subhead has-text-left" v-text="'Realizado hace 11 horas por Anonimo '+totalVotos+' votos'" ></p>
 
@@ -93,7 +99,7 @@
         </div>
       </div>
 
-      <div class="mt-5" id="seccionEncuesta" style="display: none;">
+      <div class="mt-5" >
         <div class="w-form" style="padding: 10px;">
           
 

@@ -57,17 +57,28 @@ var app = new Vue({
             },
             success: function(response)
             {
-              if(response.status != 0){
+              if(response.status ==1){
                 $.LoadingOverlay("hide");
-               location.href = '/'+response.codigo
+               location.href = '/p/'+response.codigo
               }else{
                 $.LoadingOverlay("hide");
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: 'Ya tienes un usuario registrado en este dispositivo debes iniciar sesion',
+                  confirmButtonText: `OK`,
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    location.href = '/login'
+                  }
+                })
               }
             }
             });
         }, 
      },      
   mounted: function(){    
+    $("#pregunta").focus()
 
   },    
   computed:{

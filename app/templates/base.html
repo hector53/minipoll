@@ -15,12 +15,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Varela+Round&display=swap" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/copia.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/poll.css') }}" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     {% block css %} {% endblock %}
     <script type=text/javascript> $SCRIPT_ROOT={{ request.script_root|tojson|safe }}; </script> </head> <body>
        {% if index %}
         <div class="notification-bar">
                 <div class="container-2 w-container">
-                        <div class="text-block-13">Entrar a un evento?</div>
+                        <div class="text-block-13">{{idioma.notificationBar}}</div>
                         <div class="text-block-14">#</div>
                         <div id="appB">
                         <input type="text" class="div-block-13" v-model="codigoBuscador" @keyup.enter="buscarEncuesta" />
@@ -34,6 +36,38 @@
                 <div class="navbar-brand mr-2 is-flex is-align-items-center">
                    <a href="/" class=" is-flex is-align-items-center"><div class="logotipo"><div class="logotipo-fill"></div></div>
                     <div class="company">result.app</div></a>
+                    <div class="dropdown is-hoverable">
+                        <div class="dropdown-trigger">
+                          <button class="button buttonLang" aria-haspopup="true" aria-controls="dropdown-menu3">
+                            <span>
+                                {% if idioma.idioma == 'en' %}
+                                    English
+                                {% endif %}
+                                {% if idioma.idioma == 'es' %}
+                                    Español
+                                {% endif %}
+                            </span>
+                            <span class="icon is-small">
+                                <i class="fa fa-caret-down" aria-hidden="true"></i>
+                            </span>
+                          </button>
+                        </div>
+                        <div class="dropdown-menu" id="dropdown-menu3" role="menu">
+                          <div class="dropdown-content">
+                              <div id="appLang">
+                                <a  class="dropdown-item" @click="cambiarIdioma('{{idioma.idioma}}')" >
+                                    {% if idioma.idioma == 'en' %}
+                                    Español
+                                    {% endif %}
+                                    {% if idioma.idioma == 'es' %}
+                                    English
+                                    {% endif %}
+                                </a>
+                              </div>
+                            
+                          </div>
+                        </div>
+                      </div>
                     
                     <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
                         data-target="navbarBasicExample">
@@ -47,17 +81,23 @@
                 <div class="navbar-menu is-hidden-desktop menuPhone " :class="NavbarMenuisOpen">
                     <div class="navbar-start">
                         <div class="my-4">
-                            <a class="navbar-item title is-5 my-2" href="/">PRODUCTOS</a>
+                            <a class="navbar-item title is-5 my-2" href="/">{{idioma.productMenu|upper }}</a>
                         </div>
                         <div class="my-4">
-                            <a class="navbar-item title is-5 my-2" href="/">PRECIOS</a>
+                            <a class="navbar-item title is-5 my-2" href="/">{{idioma.priceMenu|upper }}</a>
                         </div>
 
-                        <div class="navbar-item is-hidden-desktop">
-                            <a href="/panel" class="button is-light is-fullwidth title is-5">ENTRAR</a>
-                            <a href="/panel" class="button is-light is-fullwidth title is-5">REGISTRO</a>
-                            <a href="/dashboard" class="button is-light is-fullwidth title is-5">DARSHBOARD</a>
-                        </div>
+                      {% if userR == 1 %}
+                            <div class="navbar-item is-hidden-desktop">
+                                <a href="/dashboard" class="button is-light is-fullwidth title is-5">{{idioma.dashboardTitle|upper }}</a>
+                                <a href="/logout" class="button is-light is-fullwidth title is-5">{{idioma.salirTitle|upper }}</a>
+                            </div>
+                       {% else %}
+                            <div class="navbar-item is-hidden-desktop">
+                            <a href="/login" class="button is-light is-fullwidth title is-5">{{idioma.loginMenu|upper }}</a>
+                            <a href="/signup" class="button is-light is-fullwidth title is-5">{{idioma.signupMenu|upper }}</a>
+                            </div>
+                      {% endif %}
 
                     </div>
                 </div>
@@ -67,24 +107,42 @@
 
                     <div class="navbar-end">
                         <a class="navbar-item">
-                            PRODUCTOS
+                            {{idioma.productMenu|upper }}
                         </a>
                         <a class="navbar-item">
-                            PRECIOS
+                            {{idioma.priceMenu|upper }}
                         </a>
-                        <div class="navbar-item">
-                            <div class="buttons">
-                                <a class="button is-info" style="font-size: 14px; background-color:#59b1ff">
-                                    ENTRAR
-                                </a>
-                                <a class="button is-info" style="font-size: 14px; background-color:#59b1ff">
-                                    REGISTRO
-                                </a>
-                                <a class="button is-info" href="/dashboard" style="font-size: 14px; background-color:#59b1ff">
-                                    DASHBOARD
-                                </a>
+                        {% if userR == 1 %}
+                            <div class="navbar-item">
+                                <div class="buttons">
+                                    <a class="button is-info" href="/dashboard" style="font-size: 14px; background-color:#59b1ff">
+                                        {{idioma.dashboardTitle|upper }}
+                                    </a>
+                                    <a class="button is-info" href="/logout" 
+                                    style="font-size: 14px; background-color:#59b1ff">
+                                    {{idioma.salirTitle|upper }}
+                                    </a>
+                                </div>
                             </div>
-                        </div>
+                        {% else %}
+                            <div class="navbar-item">
+                                <div class="buttons">
+                                    <a class="button is-info" href="/login"
+                                     style="font-size: 14px; background-color:#59b1ff">
+                                     {{idioma.loginMenu|upper }}
+                                    </a>
+                                    <a class="button is-info" href="signup"
+                                     style="font-size: 14px; background-color:#59b1ff">
+                                     {{idioma.signupMenu|upper }}
+                                    </a>
+                                    
+                                </div>
+                            </div>
+                        {% endif %}
+                        
+
+
+
                     </div>
                 </div>
             </nav>
@@ -142,10 +200,13 @@
 
         });
     </script>
+    <script src="{{ url_for('static', filename='js/idioma.js') }}"></script>
      {% if index %}
     <script src="{{ url_for('static', filename='js/buscador.js') }}"></script>
     {% endif %}
-    {% block vuejs %} {% endblock %}
+    {% block vuejs %}
+    
+    {% endblock %}
     </body>
 
 </html>

@@ -1,8 +1,8 @@
-from flask import  request, jsonify
+from flask import  request, jsonify, session, make_response, render_template
 from app import app
 from app import socketio
 from app.schemas import *
-from datetime import datetime
+from datetime import datetime, timedelta
 import socket
 import random
 import string
@@ -108,7 +108,12 @@ def buscar_encuesta_codigo():
 
 @app.route('/_get_panel' , methods=["GET"])
 def get_panel():
-        miUid = request.cookies.get('uPoll')
+        if 'loggedin' in session:
+                miUid = session["id_user"]
+        else:
+                miUid = request.cookies.get('uPoll')
+
+        
         sqlV = f"SELECT COUNT(*) FROM `votos_opciones` WHERE id_user = '{miUid}' " 
         cantVotos = getData(sqlV)
         sql = f"SELECT * FROM encuesta where id_user = '{miUid}' order by id desc " 
@@ -146,37 +151,47 @@ def get_panel():
 
 @app.route('/_guardar_encuesta' , methods=["POST"])
 def guardar_encuesta():
-    pregunta = request.form.get('pregunta', '', type=str)
-    opciones = request.form.get('opciones', '', type=str)
-    miCodigo = request.form.get('miCodigo', '', type=str)
+        #verificar si el usuario de cookie tiene un usuario registrado 
+        miUid = request.cookies.get('uPoll')
+        sql = f"SELECT * FROM users where cookieUser = '{miUid}' " 
+        getUser = getDataOne(sql)
+        status = 0
+        if getUser: 
+                if 'loggedin' in session:
+                        status = 1
+                else:
+                        status = 0
+        else:
+                status =1
 
-    miUid = request.cookies.get('uPoll')
-    misOpciones = json.loads(opciones)
-    #ahora a guardar los datos 
-    sql = f"""
-            INSERT INTO encuesta ( pregunta, id_user, cod, fecha) VALUES ( '{pregunta}',
-             '{miUid}', '{miCodigo}', '{datetime.now()}'  ) 
-                 """ 
-    id_encuesta = updateData(sql)
-    #crear qr
-    data = url_site+miCodigo
-    QRCodefile = "app/static/img/qr/QR_"+miCodigo+".png"
-    QRimage = qrcode.make(data)
-    QRimage.save(QRCodefile)
-
-
-    for op in misOpciones:
-            sql = f"""
-            INSERT INTO opcion_encuesta ( opcion, id_encuesta) VALUES ( '{op}',
-             '{id_encuesta}' ) 
-                 """ 
-            actualizar = updateData(sql)
-
-    response = {
-        'status': actualizar,
+                #existe osea q ya se ha registrado
+        pregunta = request.form.get('pregunta', '', type=str)
+        opciones = request.form.get('opciones', '', type=str)
+        miCodigo = request.form.get('miCodigo', '', type=str)
+        misOpciones = json.loads(opciones)
+        #ahora a guardar los datos 
+        sql = f"""
+        INSERT INTO encuesta ( pregunta, id_user, cod, fecha) VALUES ( '{pregunta}',
+        '{miUid}', '{miCodigo}', '{datetime.now()}'  ) 
+        """ 
+        id_encuesta = updateData(sql)
+        #crear qr
+        data = url_site+miCodigo
+        QRCodefile = "app/static/img/qr/QR_"+miCodigo+".png"
+        QRimage = qrcode.make(data)
+        QRimage.save(QRCodefile)
+        for op in misOpciones:
+                sql = f"""
+                INSERT INTO opcion_encuesta ( opcion, id_encuesta) VALUES ( '{op}',
+                '{id_encuesta}' ) 
+                """ 
+                actualizar = updateData(sql)
+        response = {
         'codigo': miCodigo,
+        'status': status
         }
-    return jsonify(response)
+        return jsonify(response)
+
 
 @app.route('/_guardar_encuesta_editar' , methods=["POST"])
 def guardar_encuesta_editar():
@@ -437,10 +452,28 @@ def get_encuesta():
 
 @app.route('/_votar_' , methods=["GET"])
 def votar_encuesta():
+        miUid = request.cookies.get('uPoll')
+        sql = f"SELECT * FROM users where cookieUser = '{miUid}' " 
+        getUser = getDataOne(sql)
+        status = 0
+        if getUser: 
+                if 'loggedin' in session:
+                        status = 1
+                else:
+                        return jsonify(result = 0) 
+        else:
+                status =1
+        sql = f"SELECT * FROM users where cookieUser = '{miUid}' " 
+        getUser = getDataOne(sql)
+        if getUser:
+                print("si existe")
+        else:
+                print("todo normal")
+
         id_opcion = request.args.get('id_opcion', '')
         id_encuesta = request.args.get('id_encuesta', '')
         #buscar si el usuario ya voto en esta encuesta 
-        miUid = request.cookies.get('uPoll')
+        
         sql2 = f"SELECT * FROM votos_opciones where id_encuesta = {id_encuesta} and id_user = '{miUid}'    " 
         print(sql2)
         opciones = getData(sql2)
@@ -457,9 +490,9 @@ def votar_encuesta():
                 actualizar = updateData(sql)
                 if actualizar:
                         socketio.emit('respuestaDelVoto', 'votaste')
-                        return jsonify(result = 1) 
+                        return jsonify(result = status) 
                 else:
-                        return jsonify(result = 0) 
+                        return jsonify(result = 3) 
 
 
 
@@ -515,3 +548,90 @@ def handle_join_room_event(data):
 def realizoVoto(data):
     app.logger.info("{} has votado in the room {}".format(data['username'], data['room']))
     socketio.emit('respuestaDelVoto', data, room=data['room'])
+
+
+#users
+
+@app.route('/_registrar_user' , methods=["POST"])
+def registrar_user():
+        firstName = request.form.get('firstName', '')
+        lastName = request.form.get('lastName', '')
+        email = request.form.get('email', '')
+        userName = request.form.get('userName', '')
+        passW = request.form.get('pass', '')
+        userCookie = request.cookies.get('uPoll')
+
+        if firstName and lastName and email and userName and passW:
+                #todos estos campos estan llenos
+                sql = f"""
+                INSERT INTO users ( firstName, lastName, email, userName, pass, cookieUser, date) 
+                VALUES 
+                ( '{firstName}', '{lastName}', '{email}', '{userName}', '{passW}', '{userCookie}', '{datetime.now()}'  ) 
+                """ 
+                id_user = updateData(sql)
+                #ahora reemplazar este id por el id de las cookies en las encuestas
+                sql2 = f"""
+                update encuesta set id_user = '{id_user}' where id_user = '{userCookie}'  
+                """ 
+                updateEncuesta = updateData(sql2)
+                #ahora reemplazAR EL USUARIO en los votos 
+                sql3 = f"""
+                update votos_opciones set id_user = '{id_user}' where id_user = '{userCookie}'  
+                """ 
+                updateVotos = updateData(sql3)
+
+                #iniciar sesion
+                session['loggedin'] = True
+                session['id_user'] = id_user
+                session['username'] = userName
+                response={
+                        "status": id_user
+                }
+        else:
+                response={
+                        "status": 0
+                }
+        return jsonify(response) 
+
+
+@app.route('/_login_user' , methods=["POST"])
+def login_user():
+        email = request.form.get('email', '')
+        passW = request.form.get('pass', '')
+
+        if email  and passW:
+                #todos estos campos estan llenos
+                sql = f"SELECT * FROM users where email = '{email}' and pass = '{passW}'  " 
+                getUser = getDataOne(sql)
+                if getUser:
+                        #iniciar sesion
+                        session['loggedin'] = True
+                        session['id_user'] = getUser[0]
+                        session['username'] = getUser[4]
+                        response={
+                                "status": 1
+                        }
+                else:
+                        response={
+                                "status": 2
+                        }
+        else:
+                response={
+                        "status": 0
+                }
+        return jsonify(response) 
+
+@app.route('/_cambiar_idioma' , methods=["POST"])
+def cambiar_idioma():
+        lang = request.form.get('lang', '')
+        if lang == 'en':
+                lang = '1'
+                print("es en")
+        else: 
+                lang='0'
+                print("es es")
+        expire_date = datetime.now()
+        expire_date = expire_date + timedelta(days=10000)
+        resp = make_response(render_template('setCookie.html'))
+        resp.set_cookie('resultAppLang', lang, expires=expire_date)
+        return resp
