@@ -154,7 +154,7 @@ def guardar_encuesta():
     misOpciones = json.loads(opciones)
     #ahora a guardar los datos 
     sql = f"""
-            INSERT INTO encuesta (id, pregunta, id_user, cod, fecha) VALUES ('null', '{pregunta}',
+            INSERT INTO encuesta ( pregunta, id_user, cod, fecha) VALUES ( '{pregunta}',
              '{miUid}', '{miCodigo}', '{datetime.now()}'  ) 
                  """ 
     id_encuesta = updateData(sql)
@@ -167,7 +167,7 @@ def guardar_encuesta():
 
     for op in misOpciones:
             sql = f"""
-            INSERT INTO opcion_encuesta (id, opcion, id_encuesta) VALUES ('null', '{op}',
+            INSERT INTO opcion_encuesta ( opcion, id_encuesta) VALUES ( '{op}',
              '{id_encuesta}' ) 
                  """ 
             actualizar = updateData(sql)
@@ -210,7 +210,7 @@ def guardar_encuesta_editar():
                 #ahora insertar las nuevas
                 for op2 in misOpcionesNuevas:
                         sql = f"""
-                        INSERT INTO opcion_encuesta (id, opcion, id_encuesta) VALUES ('null', '{op2}',
+                        INSERT INTO opcion_encuesta ( opcion, id_encuesta) VALUES ( '{op2}',
                         '{id_encuesta}' ) 
                         """ 
                         actualizar = updateData(sql)
@@ -451,7 +451,7 @@ def votar_encuesta():
                 print("no voto")
                 #guardar la votacion nueva 
                 sql = f"""
-                INSERT INTO votos_opciones (id, id_opcion, id_user, id_encuesta, fecha) VALUES ('null', '{id_opcion}',
+                INSERT INTO votos_opciones ( id_opcion, id_user, id_encuesta, fecha) VALUES ( '{id_opcion}',
                 '{miUid}', '{id_encuesta}', '{datetime.now()}'  ) 
                 """ 
                 actualizar = updateData(sql)
