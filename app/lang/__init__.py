@@ -2,7 +2,7 @@ idioma = [
     {
     ### HEAD
     "idioma": "en",
-    "signupMenu": 'Sign up', 
+   "signupMenu": 'Sign up', 
     "productMenu": 'Products',
     "priceMenu": 'Price',
     "loginMenu": 'Log in',
@@ -14,8 +14,7 @@ idioma = [
     
     "headlineHero": 'Create questions for free, ',
     "headlineHero2": 'get answers in real time',
-    "subheadHero": 'Polls, Q&A, AMA, Quizzes and more. No registration needed, 100% free and takes less than a minute.',
-    
+   "subheadHero": 'Polls, Q&A, AMA, Quizzes and more. No registration needed, 100% free and takes less than a minute.',
     "pollHeadBlock": 'Simple poll',
     "pollSubBlock": 'Create simple options ',
     "qaHeadBlock": 'Q&A',

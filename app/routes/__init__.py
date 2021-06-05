@@ -26,7 +26,7 @@ def index():
                         return render_template('index.html', idioma=idioma[int(lang)], linkSite=url_site, index=1, userR=userR)
                 else:
                         resp = make_response(render_template('index.html', idioma=idioma[0], linkSite=url_site, index=1, userR=userR))
-                        resp.set_cookie('resultAppLang', 0, expires=expire_date)
+                        resp.set_cookie('resultAppLang', '0', expires=expire_date)
                         return resp
         else:
                 userR = 0
@@ -48,7 +48,7 @@ def index():
                         else:
                                 resp = make_response(render_template('index.html',  idioma=idioma[0], linkSite=url_site, index=1, userR=userR))
                                 resp.set_cookie('uPoll', uuid.uuid4().hex, expires=expire_date)
-                                resp.set_cookie('resultAppLang', 0, expires=expire_date)
+                                resp.set_cookie('resultAppLang', '0', expires=expire_date)
                                 return resp
                                 
 @app.route("/crear")
