@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}Login{% endblock %}
+{% block title %}{{idioma.loginTitle}}{% endblock %}
 {% block metas %}
 <meta name="description" content="Crea encuestas rápidas en segundos no necesita registro">
 <meta name="twitter:card" content="summary_large_image">
@@ -20,8 +20,8 @@
 <div id="app">
     <section class="section-hero">
         <div class="container cubreRegister">
-            <h1 class="headingM ">Login</h1>
-            <p class="hero-subhead ">Securely login to your account</p>
+            <h1 class="headingM ">{{idioma.loginTitle}}</h1>
+            <p class="hero-subhead ">{{idioma.loginSubTitle}}</p>
             <div class="form-block w-form " style="text-align: center;">
     
                     <div class="divR" >
@@ -31,16 +31,16 @@
                         <input type="text" id="email" v-model="email"
                         @keyup.enter="Login"
                         class="text-field w-input" maxlength="50" 
-                        placeholder="Email Address" required="">
+                        placeholder="{{idioma.loginPlaceHolder1}}" required="">
                       
                         <input type="password" id="pass" v-model="pass"
                         class="text-field w-input" maxlength="50" 
                         @keyup.enter="Login"
-                        placeholder="Password" required="">
+                        placeholder="{{idioma.loginPlaceHolder2}}" required="">
                     </div>
                    
                     <div class="button-group">
-                        <button class="buttonN blue " @click="Login" >Login</button>
+                        <button class="buttonN blue " @click="Login" >{{idioma.loginButton}}</button>
                     </div>
                    
             </div>

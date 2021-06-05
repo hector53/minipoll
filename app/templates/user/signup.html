@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}Signup{% endblock %}
+{% block title %}{{idioma.signupTitle}}{% endblock %}
 {% block metas %}
 <meta name="description" content="Crea encuestas rápidas en segundos no necesita registro">
 <meta name="twitter:card" content="summary_large_image">
@@ -20,8 +20,8 @@
 <div id="app">
     <section class="section-hero">
         <div class="container cubreRegister">
-            <h1 class="headingM ">Signup</h1>
-            <p class="hero-subhead ">Complete the below form to create your account</p>
+            <h1 class="headingM ">{{idioma.signupTitle}}</h1>
+            <p class="hero-subhead ">{{idioma.signupSubTitle}}</p>
             <div class="form-block w-form " style="text-align: center;">
     
                     <div class="divR" >
@@ -31,11 +31,11 @@
                             <input type="text" id="firstName" v-model="firstName"
                             @keyup.enter="signup"
                             class="text-field w-input" maxlength="50" 
-                            placeholder="First Name" required="" style="    margin-right: 10px;">
+                            placeholder="{{idioma.signupPlaceHolder1}}" required="" style="    margin-right: 10px;">
                             <input type="text" id="lastName" v-model="lastName"
                             @keyup.enter="signup"
                             class="text-field w-input" maxlength="50" 
-                            placeholder="Last Name" required="">
+                            placeholder="{{idioma.signupPlaceHolder2}}" required="">
                         </div>
                         
 
@@ -43,19 +43,19 @@
                         <input type="text" id="email" v-model="email"
                         @keyup.enter="signup"
                         class="text-field w-input" maxlength="50" 
-                        placeholder="Email Address" required="">
+                        placeholder="{{idioma.signupPlaceHolder3}}" required="">
                         <input type="text" id="username" v-model="userName"
                         @keyup.enter="signup"
                         class="text-field w-input" maxlength="50" 
-                        placeholder="Username" required="">
+                        placeholder="{{idioma.signupPlaceHolder4}}" required="">
                         <input type="password" id="pass" v-model="pass"
                         @keyup.enter="signup"
                         class="text-field w-input" maxlength="50" 
-                        placeholder="Password" required="">
+                        placeholder="{{idioma.signupPlaceHolder5}}" required="">
                     </div>
                    
                     <div class="button-group">
-                        <button class="buttonN blue " @click="signup" >signup</button>
+                        <button class="buttonN blue " @click="signup" >{{idioma.signupButton}}</button>
 
                     </div>
                    

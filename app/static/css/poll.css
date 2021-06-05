@@ -839,6 +839,43 @@ input[type="checkbox"], input[type="radio"] {
     margin-top: 5px;
     color: #8a92a7;
 }
+.text-block-15 {
+    display: inline-block;
+    margin-right: 10px;
+}
+.compartir {
+    display: inline-block;
+    margin-right: 10px;
+    color: #00afee;
+    text-decoration: none;
+}
+.keyboard {
+    position: absolute;
+    right: auto;
+    bottom: auto;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    width: 24px;
+    height: 24px;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+    background-color: #fff;
+    color: #8a92a7;
+    margin-top: -35px;
+    font-weight: bold;
+}
 @media screen and (max-width: 767px)
 {
     .circle {
@@ -854,6 +891,28 @@ input[type="checkbox"], input[type="radio"] {
         display: flex;
         justify-content: center;
         text-align: center;
+    }
+    .div-block-11 {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 20px;
+        -webkit-box-pack: justify;
+        -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
+        justify-content: center;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+        border-radius: 10px;
+        box-shadow: -1px 1px 10px 0 rgb(0 0 0 / 20%);
+        text-align: center;
+    }
+    .text-block-12 {
+        font-size: 14px;
     }
 }
 

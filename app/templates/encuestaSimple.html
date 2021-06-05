@@ -19,32 +19,34 @@
 <div id="app">
     <section class="section-hero">
         <div class="container">
-            <div class="div-block-5"><a href="/" class="link"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a></div>
-            <h1 class="headingM has-text-left">Crear una encuesta</h1>
-            <p class="hero-subhead has-text-left">Completa los campos de aquí debajo para publicar tu encuesta</p>
+            <div class="div-block-5"><a href="/" class="link">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i> {{idioma.back}}</a></div>
+            <h1 class="headingM has-text-left">{{idioma.pollTitle}}</h1>
+            <p class="hero-subhead has-text-left">{{idioma.pollSubtitle}}</p>
             <div class="form-block w-form has-text-left">
                     <div class="div-block-4">
-                        <label for="name" class="field-label has-text-left">Pregunta o título</label>
+                        <label for="name" class="field-label has-text-left">{{idioma.questionLabel}}</label>
                         <input
                             type="text" class="text-field title w-input" maxlength="256" 
                             id="pregunta" v-model="preguntaEncuesta" 
-                            placeholder="Ej. ¿Cuál es tu color favorito?" ></div>
+                            placeholder="{{idioma.questionPlaceholder}}" ></div>
     
                     <div class="divR" v-for="(item, index) in opcionEncuesta" :key="index">
-                        <label :for="'opcion'+index" class="field-label has-text-left" v-text="'opcion ' + (index+1)"></label>
+                        <label :for="'opcion'+index" class="field-label has-text-left"
+                         v-text="'{{idioma.optionLabel}} ' + (index+1)"></label>
                         <input type="text"
                         class="text-field w-input" maxlength="256" 
                         v-model="opcionEncuesta[index]"
-                        placeholder="Ingrese su opción aquí" required="">
+                        placeholder="{{idioma.optionLabel}}" required="">
                         <a  class="close close_option"
                         v-show="opcionEncuesta.length > 2" @click="reducirOpciones(index)"
                         ></a>
                     </div>
                    
-                    <div class="text-block-5"  @click="addOpcion">+ Agregar otra opción</div>
+                    <div class="text-block-5"  @click="addOpcion">+ {{idioma.newOption}}</div>
                     <div class="button-group">
-                        <button class="buttonN blue " @click="crearEncuesta">PUBLICAR</button>
-                        <button class="buttonN ">OPCIONES AVANZADAS</button>
+                        <button class="buttonN blue " @click="crearEncuesta">{{idioma.submitButton}}</button>
+                        <button class="buttonN ">{{idioma.advancedButton}}</button>
 
                     </div>
                    

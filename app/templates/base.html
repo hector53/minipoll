@@ -15,11 +15,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Varela+Round&display=swap" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/copia.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/poll.css') }}" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     {% block css %} {% endblock %}
     <script type=text/javascript> $SCRIPT_ROOT={{ request.script_root|tojson|safe }}; </script> </head> <body>
-       {% if index %}
+        {% if index %}
         <div class="notification-bar">
                 <div class="container-2 w-container">
                         <div class="text-block-13">{{idioma.notificationBar}}</div>
@@ -158,19 +158,30 @@
                 <div class="column">
                    
                     <div class="div-block-16">
-                        <a href="/" class=" is-flex is-align-items-center"><div class="logotipo-dark"><div class="logotipo-fill"></div></div>
+                        <a href="/" class=" is-flex is-align-items-center"><div class="logotipo-dark">
+                            <div class="logotipo-fill"></div></div>
                             <div class="company">result.app</div></a>
                     </div>
                    
-                    <div class="div-block-15"><a href="#" class="social-icon w-inline-block"><img src="https://uploads-ssl.webflow.com/60b13cec71296d20a8aa5bf0/60b13cec71296d43d2aa5c12_14-social-email.png" width="20" alt=""></a><a href="#" target="_blank" class="social-icon w-inline-block"><img src="https://uploads-ssl.webflow.com/60b13cec71296d20a8aa5bf0/60b13cec71296d0b0faa5c13_14-social-facebook.png" width="20" alt=""></a><a href="#" target="_blank" class="social-icon w-inline-block"><img src="https://uploads-ssl.webflow.com/60b13cec71296d20a8aa5bf0/60b13cec71296de436aa5c15_14-social-twitter.png" width="20" alt=""></a></div>
+                    <div class="div-block-15"><a href="#" class="social-icon w-inline-block">
+                        <img src="https://uploads-ssl.webflow.com/60b13cec71296d20a8aa5bf0/60b13cec71296d43d2aa5c12_14-social-email.png" width="20" alt=""></a><a href="#" target="_blank" class="social-icon w-inline-block"><img src="https://uploads-ssl.webflow.com/60b13cec71296d20a8aa5bf0/60b13cec71296d0b0faa5c13_14-social-facebook.png" width="20" alt=""></a><a href="#" target="_blank" class="social-icon w-inline-block"><img src="https://uploads-ssl.webflow.com/60b13cec71296d20a8aa5bf0/60b13cec71296de436aa5c15_14-social-twitter.png" width="20" alt=""></a></div>
                   
                 </div>
                 <div class="column" >
-                    <h3 class="heading-2">Producto</h3><a href="#" class="link-3">FAQ</a><a href="#" class="link-3">Plantillas</a><a href="#" class="link-3">Integraciones</a><a href="#" class="link-3">Nosotros</a><a href="#" class="link-3">Soporte</a>
+                    <h3 class="heading-2">{{idioma.footer1Head}}</h3>
+                    <a href="#" class="link-3">{{idioma.footer1Link}}</a>
+                    <a href="#" class="link-3">{{idioma.footer2Link}}</a>
+                    <a href="#" class="link-3">{{idioma.footer3Link}}</a>
+                    <a href="#" class="link-3">{{idioma.footer4Link}}</a>
+                    <a href="#" class="link-3">{{idioma.footer5Link}}</a>
                 </div>
 
                 <div class="column">
-                    <h3 class="heading-2">Cuenta</h3><a href="#" class="link-3">Mis eventos</a><a href="#" class="link-3">Precios</a><a href="#" class="link-3">Políticas de privacidad</a><a href="#" class="link-3">Términos y condiciones</a>
+                    <h3 class="heading-2">{{idioma.footer2Head}}</h3>
+                    <a href="#" class="link-3">{{idioma.footer6Link}}</a>
+                    <a href="#" class="link-3">{{idioma.footer7Link}}</a>
+                    <a href="#" class="link-3">{{idioma.footer8Link}}</a>
+                    <a href="#" class="link-3">{{idioma.footer9Link}}</a>
                 </div>
               
               </div>
@@ -201,11 +212,11 @@
         });
     </script>
     <script src="{{ url_for('static', filename='js/idioma.js') }}"></script>
-     {% if index %}
+    {% if index %}
     <script src="{{ url_for('static', filename='js/buscador.js') }}"></script>
     {% endif %}
     {% block vuejs %}
-    
+
     {% endblock %}
     </body>
 

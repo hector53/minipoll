@@ -1,32 +1,32 @@
 {% extends 'base.html' %}
-{% block title %}{{encuesta.1}}{% endblock %}
+{% block title %}{{encuesta.0.pregunta}}{% endblock %}
 {% block metas %}
 <meta name="description" content="{{meta}}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@site">
 <meta name="twitter:creator" content="@fastpoll">
 {% if resultado == 1 %}
-<meta property="og:url" content="{{linkSite}}{{encuesta.3}}+">
+<meta property="og:url" content="{{linkSite}}{{encuesta.0.cod}}+">
 {% else %}
-<meta property="og:url" content="{{linkSite}}{{encuesta.3}}">
+<meta property="og:url" content="{{linkSite}}{{encuesta.0.cod}}">
 {% endif %}
 
 
 
-<meta property="og:title" content="{{encuesta.1}} - Fastpoll">
+<meta property="og:title" content="{{encuesta.pregunta}} - Fastpoll">
 <meta property="og:description" content="{{meta}}">
 {% if resultado == 1 %}
-<meta property="og:image" content="{{linkSite+'static/img/captures/captureR_'+encuesta.3+'.jpg'}}">
+<meta property="og:image" content="{{linkSite+'static/img/captures/captureR_'+encuesta.0.cod+'.jpg'}}">
 {% else %}
-<meta property="og:image" content="{{linkSite+'static/img/captures/capture_'+encuesta.3+'.jpg'}}">
+<meta property="og:image" content="{{linkSite+'static/img/captures/capture_'+encuesta.0.cod+'.jpg'}}">
 {% endif %}
 
 <meta property="og:image:alt" content="fastpoll banner">
 <meta property="og:site_name" content="FastPoll">
 {% if resultado == 1 %}
-<link rel="canonical" href="{{linkSite}}{{encuesta.3}}+">
+<link rel="canonical" href="{{linkSite}}{{encuesta.0.cod}}+">
 {% else %}
-<link rel="canonical" href="{{linkSite}}{{encuesta.3}}">
+<link rel="canonical" href="{{linkSite}}{{encuesta.0.cod}}">
 {% endif %}
 
 
@@ -37,14 +37,14 @@
 {% endblock %}
 {% block content %}
 {% if resultado == 1 %}
-<link itemprop="thumbnailUrl" href="{{linkSite+'static/img/captures/captureR_'+encuesta.3+'.jpg'}}">
+<link itemprop="thumbnailUrl" href="{{linkSite+'static/img/captures/captureR_'+encuesta.0.cod+'.jpg'}}">
 <span itemprop="thumbnail" itemscope itemtype="http://schema.org/ImageObject">
-  <link itemprop="url" href="{{linkSite+'static/img/captures/captureR_'+encuesta.3+'.jpg'}}">
+  <link itemprop="url" href="{{linkSite+'static/img/captures/captureR_'+encuesta.0.cod+'.jpg'}}">
 </span>
 {% else %}
-<link itemprop="thumbnailUrl" href="{{linkSite+'static/img/captures/capture_'+encuesta.3+'.jpg'}}">
+<link itemprop="thumbnailUrl" href="{{linkSite+'static/img/captures/capture_'+encuesta.0.cod+'.jpg'}}">
 <span itemprop="thumbnail" itemscope itemtype="http://schema.org/ImageObject">
-  <link itemprop="url" href="{{linkSite+'static/img/captures/capture_'+encuesta.3+'.jpg'}}">
+  <link itemprop="url" href="{{linkSite+'static/img/captures/capture_'+encuesta.0.cod+'.jpg'}}">
 </span>
 {% endif %}
 
@@ -79,8 +79,8 @@
     <div class="container cubreEncuesta" style="display: none;">
       
       
-      <h1 class="headingM has-text-left">{{encuesta.1}}</h1>
-      <p class="hero-subhead has-text-left" v-text="'Realizado hace 11 horas por Anonimo '+totalVotos+' votos'" ></p>
+      <h1 class="headingM has-text-left">{{encuesta.0.pregunta}}</h1>
+      <p class="hero-subhead has-text-left" v-text="'{{idioma.createdAbout}}  {{encuesta.0.fecha}} por Anonimo '+totalVotos+' votos'" ></p>
 
       <div style="padding: 10px;     text-align: left;" >
         <div class="text-block-8" @click="mostrarQr">
@@ -88,13 +88,22 @@
           <i class="fa fa-arrow-down" v-if="qrCode"   aria-hidden="true"></i>
           <i class="fa fa-arrow-right" v-else  aria-hidden="true"></i>
           
-          &nbsp;Compartir con código QR</div>
+          &nbsp;{{idioma.shareQR}}</div>
         <div class="div-block-11" v-if="qrCode"  >
           <div>
-            <div class="text-block-9"># {{encuesta.3}}</div>
-            <div class="text-block-10" @click="copyLink('{{linkSite}}{{encuesta.3}}', 1)">Copiar la url completa</div>
-          </div><img
-          src="{{ url_for('static', filename='img/qr/QR_'+encuesta.3+'.png') }}"
+            <div class="text-block-9"># {{encuesta.0.cod}}</div>
+            <div class="text-block-10" @click="copyLink('{{linkSite}}{{encuesta.0.cod}}', 1)">
+              {{idioma.copyURL}}</div>
+              <div><div class="text-block-15">{{idioma.shareOn}} </div>
+              <a href="#" class="compartir"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+              <a href="#" class="compartir"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+              <a href="#" class="compartir"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+              <a href="#" class="compartir"><i class="fa fa-whatsapp" aria-hidden="true"></i></a>
+              <a href="#" class="compartir"><i class="fa fa-slack" aria-hidden="true"></i></a>
+              <a href="#" class="compartir"><i class="fa fa-envelope-o" aria-hidden="true"></i></a></div>
+          </div>
+          <img
+          src="{{ url_for('static', filename='img/qr/QR_'+encuesta.0.cod+'.png') }}"
             loading="lazy" alt="" class="image-2">
         </div>
       </div>
@@ -118,6 +127,7 @@
               <div class="column is-flex is-justify-content-space-between">
 
                 <div class="cubreIconandOption is-flex">
+                  <div class="keyboard"><div v-text="index+1" ></div></div>
                   <div class="div-block-8">
                     <div class="div-block-9" v-if="item['porcentaje'] > 0 && miVoto == item['id']" ></div>
                   </div>
@@ -187,10 +197,11 @@
 
             
             <div class="div-block-10">
-              <button class="buttonN blue">Notificarme por Email</button>
+              <button class="buttonN blue">{{idioma.notificationEmail}}</button>
                 
-                <a href="{{encuesta.3}}+"  class="link-2" v-if="resultados ==  false">Directo a los Resultados</a>
-                <a class="link-2" @click="cancelarVoto" v-if="resultados && yaVote ">Cancelar Mi Voto</a>
+                <a href="{{encuesta.0.cod}}+"  class="link-2" v-if="resultados ==  false">
+                  {{idioma.toResult}}</a>
+                <a class="link-2" @click="cancelarVoto" v-if="resultados && yaVote ">{{idioma.cancelVote}}</a>
               </div>
           
         </div>

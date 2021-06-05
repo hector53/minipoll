@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}Dashboard{% endblock %}
+{% block title %}{{idioma.dashboardTitle}}{% endblock %}
 {% block metas %}
 <meta name="description" content="Crea encuestas rápidas en segundos no necesita registro">
 <meta name="twitter:card" content="summary_large_image">
@@ -18,7 +18,7 @@
 {% block content %}
 <div id="app">
   <div id="sinEncuestas" style="display: none;">
-    <p>No ha realizado ninguna encuesta</p>
+    <p>{{idioma.notEvents}}</p>
   </div>
   <div id="loader">
 
@@ -26,10 +26,11 @@
 
   <section class="section-hero" style="display: none;">
     <div class="container">
-      <div class="div-block-5"><a href="/" class="link"><i class="fa fa-arrow-left" aria-hidden="true"></i> Volver</a>
+      <div class="div-block-5"><a href="/" class="link">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i> {{idioma.back}}</a>
       </div>
-      <h1 class="headingM has-text-left">Dashboard</h1>
-      <p class="hero-subhead has-text-left">Estadisticas</p>
+      <h1 class="headingM has-text-left">{{idioma.dashboardTitle}}</h1>
+      <p class="hero-subhead has-text-left">{{idioma.dashboardSubtitle}}</p>
 
       <div class="columns p-2 ">
         <div class="column " >
@@ -38,7 +39,7 @@
               <i class="fa fa-bars faIconPoll" aria-hidden="true"></i>
             </div>
             <h3 class="pollNumber" v-text="cantEncuestas" ></h3>
-            <p class="pollsText">Polls</p>
+            <p class="pollsText">{{idioma.dashboardStatisTitle1}}</p>
           </div>
         </div>
         <div class="column">
@@ -47,7 +48,7 @@
               <i class="fa fa-check faIconPoll" aria-hidden="true"></i>
             </div>
             <h3 class="pollNumber" v-text="cantVotos"  ></h3>
-            <p class="pollsText">Votes</p>
+            <p class="pollsText">{{idioma.dashboardStatisTitle2}}</p>
           </div>
         </div>
         <div class="column">
@@ -64,11 +65,11 @@
         <a href="/crear">
             <div class="crear-producto">
                 <div class="div-block-2">
-                    <div class="text-block"><strong class="bold-text">ENCUESTA SIMPLE<br></strong></div>
-                    <div class="text-block-2">Creá opciones simples</div>
+                    <div class="text-block"><strong class="bold-text">{{idioma.pollHeadBlock}}<br></strong></div>
+                    <div class="text-block-2">{{idioma.pollSubBlock}}</div>
                 </div>
                 <div class="tag is-danger">
-                    <div class="text-block-3">GRATIS</div>
+                    <div class="text-block-3">{{idioma.tagGratis}}</div>
                 </div>
             </div>
         </a>
@@ -78,23 +79,22 @@
     <div class="column is-3">
         <div class="crear-producto">
             <div class="div-block-2">
-                <div class="text-block"><strong class="bold-text">Q&A<br></strong></div>
-                <div class="text-block-2">Hace preguntas,
-                    obtené respuestas</div>
+                <div class="text-block"><strong class="bold-text">{{idioma.qaHeadBlock}}<br></strong></div>
+                <div class="text-block-2">{{idioma.qaSubBlock}}</div>
             </div>
             <div class="tag is-danger">
-                <div class="text-block-3">GRATIS</div>
+                <div class="text-block-3">{{idioma.tagGratis}}</div>
             </div>
         </div>
     </div>
     <div class="column is-3">
         <div class="crear-producto">
             <div class="div-block-2">
-                <div class="text-block"><strong class="bold-text">Dia y Hora<br></strong></div>
-                <div class="text-block-2">Coordiná la mejor fecha de encuentro</div>
+                <div class="text-block"><strong class="bold-text">{{idioma.dateHeadBlock}}<br></strong></div>
+                <div class="text-block-2">{{idioma.dateSubBlock}}</div>
             </div>
             <div class="tag is-danger">
-                <div class="text-block-3">GRATIS</div>
+                <div class="text-block-3">{{idioma.tagGratis}}</div>
             </div>
         </div>
     </div>
@@ -102,11 +102,11 @@
     <div class="column is-3">
         <div class="crear-producto">
             <div class="div-block-2">
-                <div class="text-block"><strong class="bold-text">NUBE DE PALABRAS <br></strong></div>
-                <div class="text-block-2">Preguntá y recibí todo tipo de respuestas </div>
+                <div class="text-block"><strong class="bold-text">{{idioma.cloudHeadBlock}} <br></strong></div>
+                <div class="text-block-2">{{idioma.cloudSubBlock}}</div>
             </div>
             <div class="tag is-info">
-                <div class="text-block-3">REGISTRO</div>
+                <div class="text-block-3">{{idioma.tagRegistro}}</div>
             </div>
         </div>
     </div>
@@ -116,11 +116,11 @@
     <div class="column is-3">
         <div class="crear-producto">
             <div class="div-block-2">
-                <div class="text-block"><strong class="bold-text">RATING<br></strong></div>
-                <div class="text-block-2">Obtené respuestas númericas.</div>
+                <div class="text-block"><strong class="bold-text">{{idioma.rateHeadBlock}}<br></strong></div>
+                <div class="text-block-2">{{idioma.rateSubBlock}}</div>
             </div>
             <div class="tag is-info">
-                <div class="text-block-3">REGISTRO</div>
+                <div class="text-block-3">{{idioma.tagRegistro}}</div>
             </div>
         </div>
     </div>
@@ -128,11 +128,11 @@
         <a href="/sorteos">
         <div class="crear-producto">
             <div class="div-block-2">
-                <div class="text-block"><strong class="bold-text">SORTEOS<br></strong></div>
-                <div class="text-block-2">Realizá sorteos para redes</div>
+                <div class="text-block"><strong class="bold-text">{{idioma.giveHeadBlock}}<br></strong></div>
+                <div class="text-block-2">{{idioma.giveSubBlock}}</div>
             </div>
             <div class="tag is-info">
-                <div class="text-block-3">REGISTRO</div>
+                <div class="text-block-3">{{idioma.tagRegistro}}</div>
             </div>
         </div>
         </a>
@@ -140,11 +140,11 @@
     <div class="column is-3">
         <div class="crear-producto">
             <div class="div-block-2">
-                <div class="text-block"><strong class="bold-text">QUIZZ<br></strong></div>
-                <div class="text-block-2">Evaluá conocimiento</div>
+                <div class="text-block"><strong class="bold-text">{{idioma.quizzHeadBlock}}<br></strong></div>
+                <div class="text-block-2">{{idioma.quizzSubBlock}}</div>
             </div>
             <div class="tag is-success">
-                <div class="text-block-3">PRO</div>
+                <div class="text-block-3">{{idioma.tagPro}}</div>
             </div>
         </div>
     </div>
@@ -152,15 +152,18 @@
     <div class="column is-3">
         <div class="crear-producto">
             <div class="div-block-2">
-                <div class="text-block"><strong class="bold-text">Trivia<br></strong></div>
-                <div class="text-block-2">Coming Soon
+                <div class="text-block"><strong class="bold-text">{{idioma.triviaHeadBlock}}<br></strong></div>
+                <div class="text-block-2">{{idioma.triviaSubBlock}}
                 </div>
             </div>
             <div class="tag is-success">
-                <div class="text-block-3">PRO</div>
+                <div class="text-block-3">{{idioma.tagPro}}</div>
             </div>
         </div>
     </div>
+    
+    
+
 </div>
 </div>
 {% endif %}
@@ -168,7 +171,7 @@
       
 
 
-      <h1 class="headingM has-text-left" style="    margin-bottom: 40px;">Your Polls</h1>
+      <h1 class="headingM has-text-left" style="    margin-bottom: 40px; margin-top: 40px;">{{idioma.dashboardTitle2}}</h1>
       <div v-for="(item, index) in misEncuestas" :key="index" >
        <a :href="'/p/'+item['codigo']+'+'" style="color: #222;">
         <div class="CubOption cubreDiv">
@@ -177,7 +180,7 @@
               <div class="cubreIconandOption is-flex has-text-left">
                 <span for="Opción " class="radio-button-label w-form-label" v-text="item['pregunta']" ></span>
               </div>
-              <div class="text-block-12" v-text="item['cantVoto']+' Votes'" ></div>
+              <div class="text-block-12" v-text="item['cantVoto']+' {{idioma.votes}}'" ></div>
             </div>
           </div>
           <div class="columns">

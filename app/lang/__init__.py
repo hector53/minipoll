@@ -17,19 +17,19 @@ idioma = [
     "subheadHero": 'Polls, Q&A, AMA, Quizzes and more. No registration needed, 100% free and takes less than a minute.',
     
     "pollHeadBlock": 'Simple poll',
-    "pollSubBlock": 'Creá opciones simples',
+    "pollSubBlock": 'Create simple options ',
     "qaHeadBlock": 'Q&A',
-    "qaSubBlock": 'Hace preguntas, obtené respuestas',
+    "qaSubBlock": 'Ask questions, get answers',
     "dateHeadBlock": 'Date',
-    "dateSubBlock": 'Coordiná la mejor fecha de encuentro',
+    "dateSubBlock": 'Coordinate the best meeting date',
     "cloudHeadBlock": 'Cloud of words',
-    "cloudSubBlock": 'Preguntá y recibí todo tipo de respuestas',
+    "cloudSubBlock": 'Ask and I received all kinds of answers ',
     "rateHeadBlock": 'Rating',
-    "rateSubBlock": 'Obtené respuestas númericas',
+    "rateSubBlock": 'Get numerical answers ',
     "giveHeadBlock": 'Giveaways',
-    "giveSubBlock": 'Realizá sorteos para redes',
+    "giveSubBlock": 'Run sweepstakes for networks ',
     "quizzHeadBlock": 'Quizz',
-    "quizzSubBlock": 'Evaluá conocimiento',
+    "quizzSubBlock": 'Assess knowledge ',
     "triviaHeadBlock": 'Trivia',
     "triviaSubBlock": 'Coming soon',
     
@@ -39,34 +39,34 @@ idioma = [
     "tagRegistro": 'REGISTER', 
     "tagPro": 'PRO', 
     "brandTitle": 'Used by  the best',
-    "callHeadline": 'Tus videollamadas al máximo!',
-    "callSubheadline": 'Creamos una serie de herramientas virales para que hasta tu abuela sepa cómo acceder y responder',
+    "callHeadline": 'Your video calls to the fullest! ',
+    "callSubheadline": 'We create a series of virtual tools so that even your grandmother knows how to access and respond',
     "call2Headline": 'Real time answers on your webinars',
-    "call2Subheadline": 'Todas las respuestas a todos los tipos de preguntas, visibles al instante por cualquiera de tus destinatarios. Ideal para que todos vean en vivo y directo desde tus videollamadas o redes sociales.',
+    "call2Subheadline": 'All the answers to all types of questions, instantly visible by any of your recipients. Ideal for everyone to see live and direct from your video calls or social networks.',
     "call3Headline": 'All kind of integrations',
-    "call3Subheadline": 'Con nuestra API e integraciones preparadas para las herramientas más utilizadas podrás hacer más simple nuestro uso.',
+    "call3Subheadline": 'With our API and integrations prepared for the most used tools, you will be able to make our use simpler.',
     "productHead": 'Flexibility and control of your events',
-    "productSubhead": 'Creá una cuenta para tener control avanzado, gratis',
+    "productSubhead": 'Create an account for free advanced control ',
     "product1Head": 'Dashboard',
-    "product1Subhead": 'Con tu cuenta tendrás gratis un espacio en la nube para guardar tus eventos y votos. Podrás prestarle más atención a tu audiencia.',
+    "product1Subhead": 'With your account you will have a free space in the cloud to save your events and votes. You will be able to pay more attention to your audience.',
     "product2Head": 'Advanced options',
-    "product2Subhead": 'Todos los eventos cuentan con opciones especiales a cada necesidad. Personaliza cada pregunta, cada juego y adaptarlo a tu videollamada.',
+    "product2Subhead": 'All events have special options for every need. Customize each question, each game and adapt it to your video call.',
     "product3Head": 'Analytics',
-    "product3Subhead": 'De forma personalizada, generamos una serie de datos para cada eventos, cada pregunta y cada respuesta o voto.',
+    "product3Subhead": 'In a personalized way, we generate a series of data for each event, each question and each answer or vote.',
     
     "featureHead": 'We are the best at...',
     "feature1Head": 'Interface',
-    "feature1Subhead": 'Estupenda estética en tiempo real, simple y fácil de utilizar con tu público.',
+    "feature1Subhead": 'Great aesthetics in real time, simple and easy to use with your audience. ',
     "feature2Head": 'Security',
-    "feature2Subhead": 'Usamos cookies y sesiones de navegador para asegurarnos que todo resulte correctamente.',
+    "feature2Subhead": 'We use cookies and browser sessions to ensure that everything turns out correctly. ',
     "feature3Head": 'Profile',
-    "feature3Subhead": 'Te damos la opción de registrarte gratuitamente para tener tus eventos bajo control. ',
+    "feature3Subhead": 'We give you the option to register for free to have your events under control. ',
     "feature4Head": 'Share',
-    "feature4Subhead": 'Contamos con herramientas para compartir en real time tus eventos. Viralizá tus preguntas y obtené mejores respuestas.',
+    "feature4Subhead": 'We have tools to share your events in real time. Viralize your questions and get better answers.',
     "feature5Head": 'Control',
-    "feature5Subhead": 'Desde escritorio o smartphone tené siempre un analisis y control sobre los resultados que vas adquiriendo.',
+    "feature5Subhead": 'From your desktop or smartphone you always have an analysis and control over the results that you are acquiring. ',
     "feature6Head": 'API & Bots',
-    "feature6Subhead": 'Herramientas para desarrolladores que te permitirán crear nuestros eventos con marca blanca y mucha facilidad.',
+    "feature6Subhead": 'Developer tools that will allow you to create our white label events very easily.',
     
     ### FOOTER
     "footer1Head": 'Product',
@@ -81,6 +81,9 @@ idioma = [
     "footer8Link": 'Privacy policy',
     "footer9Link": 'Terms & conditions',
     
+
+        ###Error
+    "notEvents": "no data yet ",
     ### GENERAL
     
     "back": 'Back',
@@ -109,7 +112,7 @@ idioma = [
     ### NEW POLL
     
     "pollTitle": 'Create a poll',
-    "pollSubtitle": 'Completa los campos de aquí debajo para publicar tu encuesta',
+    "pollSubtitle": 'Complete the fields below to publish your survey',
     "questionLabel": 'Question or title',
     "questionPlaceholder": "Eg. What's your favorite color?",
     "optionLabel": 'Option',
@@ -121,6 +124,31 @@ idioma = [
     "notificationEmail": 'Notify by email',
     "toResult": 'Direct to the result',
     "cancelVote": 'Cancel my vote',
+
+
+    ###LOGIN
+    "loginTitle": "Login", 
+    "loginSubTitle": "Securely login to your account", 
+    "loginPlaceHolder1": "Email Adress", 
+    "loginPlaceHolder2": "Password", 
+    "loginButton": "Login", 
+
+     ###Signup
+    "signupTitle" : "Signup", 
+    "signupSubTitle": "Complete the below form to create your account", 
+    "signupPlaceHolder1": "First Name", 
+    "signupPlaceHolder2": "Last Name", 
+    "signupPlaceHolder3": "Email Adress", 
+    "signupPlaceHolder4": "Username", 
+    "signupPlaceHolder5": "Password", 
+    "signupButton": "Signup", 
+
+    ###Dashboard
+    "dashboardTitle": "DASHBOARD", 
+    "dashboardSubtitle": "General statistics ", 
+    "dashboardStatisTitle1": "Polls", 
+    "dashboardStatisTitle2": "Results", 
+    "dashboardTitle2": "Your Events",
 },
 
 {
@@ -201,9 +229,12 @@ idioma = [
     "footer4Link": 'Nosotros',
     "footer5Link": 'Soporte',
     "footer6Link": 'Mis eventos',
-    "footer7Link": 'Precio',
+    "footer7Link": 'Precios',
     "footer8Link": 'Políticas de privacidad',
     "footer9Link": 'Términos y condiciones',
+
+    ###Error
+    "notEvents": "no hay datos todavía",
     
     ### GENERAL
     
@@ -245,6 +276,34 @@ idioma = [
     "notificationEmail": 'Notificarme por email',
     "toResult": 'Directo al resultado',
     "cancelVote": 'Cancelar mi voto',
+
+    ###LOGIN
+    "loginTitle": "Iniciar Sesión", 
+    "loginSubTitle": "Inicie sesión de forma segura en su cuenta", 
+    "loginPlaceHolder1": "Correo Electronico", 
+    "loginPlaceHolder2": "Contraseña", 
+    "loginButton": "Entrar",
+
+
+    ###Signup
+    "signupTitle" : "Registrarse", 
+    "signupSubTitle": "Complete el siguiente formulario para crear su cuenta", 
+    "signupPlaceHolder1": "Nombres", 
+    "signupPlaceHolder2": "Apellidos", 
+    "signupPlaceHolder3": "Correo Electrónico", 
+    "signupPlaceHolder4": "Nombre de Usuario", 
+    "signupPlaceHolder5": "Contraseña", 
+    "signupButton": "Registrarse", 
+
+    ###Dashboard
+    "dashboardTitle": "Panel", 
+    "dashboardSubtitle": "Estadísticas Generales ", 
+    "dashboardStatisTitle1": "Eventos", 
+    "dashboardStatisTitle2": "Resultados", 
+    "dashboardTitle2": "Mis Eventos",
+
+
+
 }
 
 ]

@@ -1,3 +1,4 @@
+
 from flask import render_template,  request, jsonify,  redirect, url_for, make_response, session
 from app import app
 from app.schemas import getDataOne, getData
@@ -7,7 +8,7 @@ import uuid
 import datetime
 expire_date = datetime.datetime.now()
 expire_date = expire_date + datetime.timedelta(days=10000)
-
+from app.request import time_passed
 """
 @app.before_request
 def before_request():
@@ -157,6 +158,14 @@ def vista_encuesta(codigo):
         encuesta = getDataOne(sql)
         if encuesta:
                 idEncuesta = encuesta[0]
+                dataEncuesta = []
+                dataEncuesta.append({
+                'id': encuesta[0],
+                'pregunta': encuesta[1],
+                'id_user':   encuesta[2],
+                'cod': encuesta[3],
+                'fecha': time_passed(str(encuesta[4]))
+                })
                 if resultado == 1:
                         #buscar votos 
                         sql3 = f"SELECT * FROM votos_opciones where id_encuesta = {idEncuesta}  " 
@@ -201,12 +210,12 @@ def vista_encuesta(codigo):
                         mio = 0
                 if userR==1:
                         #existe la cookie no la creo 
-                        return render_template("encuesta.html", idioma=idioma[int(lang)], userR=userR, encuesta=encuesta, linkSite=url_site, mio=mio, meta=descripcionMeta, resultado=resultado)
+                        return render_template("encuesta.html", idioma=idioma[int(lang)], userR=userR, encuesta=dataEncuesta, linkSite=url_site, mio=mio, meta=descripcionMeta, resultado=resultado)
                 else:
                         if miUid:
-                                return render_template("encuesta.html", idioma=idioma[int(lang)],  userR=userR, encuesta=encuesta, linkSite=url_site, mio=mio, meta=descripcionMeta, resultado=resultado)
+                                return render_template("encuesta.html", idioma=idioma[int(lang)],  userR=userR, encuesta=dataEncuesta, linkSite=url_site, mio=mio, meta=descripcionMeta, resultado=resultado)
                         else:
-                                resp = make_response(render_template("encuesta.html", idioma=idioma[int(lang)],  userR=userR, encuesta=encuesta, linkSite=url_site, mio=mio, meta=descripcionMeta, resultado=resultado))
+                                resp = make_response(render_template("encuesta.html", idioma=idioma[int(lang)],  userR=userR, encuesta=dataEncuesta, linkSite=url_site, mio=mio, meta=descripcionMeta, resultado=resultado))
                                 resp.set_cookie('uPoll', uuid.uuid4().hex, expires=expire_date)
                                 return resp
         else:
