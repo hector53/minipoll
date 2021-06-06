@@ -25,9 +25,7 @@ def index():
                 if lang:
                         return render_template('index.html', idioma=idioma[int(lang)], linkSite=url_site, index=1, userR=userR)
                 else:
-                        resp = make_response(render_template('index.html', idioma=idioma[0], linkSite=url_site, index=1, userR=userR))
-                        resp.set_cookie('resultAppLang', '0', expires=expire_date)
-                        return resp
+                        return render_template('index.html', idioma=idioma[0], linkSite=url_site, index=1, userR=userR)
         else:
                 userR = 0
                 username = request.cookies.get('uPoll')
@@ -36,9 +34,7 @@ def index():
                         if lang:
                                 return render_template('index.html',   idioma=idioma[int(lang)], linkSite=url_site, index=1, userR=userR)
                         else:
-                                resp = make_response(render_template('index.html',  idioma=idioma[0], linkSite=url_site, index=1, userR=userR))
-                                resp.set_cookie('resultAppLang', '0', expires=expire_date)
-                                return resp
+                                return render_template('index.html',  idioma=idioma[0], linkSite=url_site, index=1, userR=userR)
                 else:
                         #no existe la creo 
                         if lang:
@@ -48,7 +44,6 @@ def index():
                         else:
                                 resp = make_response(render_template('index.html',  idioma=idioma[0], linkSite=url_site, index=1, userR=userR))
                                 resp.set_cookie('uPoll', uuid.uuid4().hex, expires=expire_date)
-                                resp.set_cookie('resultAppLang', '0', expires=expire_date)
                                 return resp
                                 
 @app.route("/crear")
@@ -58,8 +53,7 @@ def crear():
                 print("no la creo")
         else:
                 print("la creo")
-                crear_cookie_idioma()
-                lang = request.cookies.get('resultAppLang')
+                lang = 0
         
         if 'loggedin' in session:
                 userR = 1
@@ -83,8 +77,7 @@ def sorteos():
                 print("no la creo")
         else:
                 print("la creo")
-                crear_cookie_idioma()
-                lang = request.cookies.get('resultAppLang')
+                lang = 0
         
         if 'loggedin' in session:
                 userR = 1
@@ -107,8 +100,7 @@ def panel():
                 print("no la creo")
         else:
                 print("la creo")
-                crear_cookie_idioma()
-                lang = request.cookies.get('resultAppLang')
+                lang = 0
         
         if 'loggedin' in session:
                 userR = 1
@@ -134,8 +126,7 @@ def vista_encuesta(codigo):
                 print("no la creo")
         else:
                 print("la creo")
-                crear_cookie_idioma()
-                lang = request.cookies.get('resultAppLang')
+                lang = 0
         
         if 'loggedin' in session:
                 userR = 1
@@ -229,8 +220,7 @@ def editar_encuesta(codigo):
                 print("no la creo")
         else:
                 print("la creo")
-                crear_cookie_idioma()
-                lang = request.cookies.get('resultAppLang')
+                lang = 0
         
         if 'loggedin' in session:
                 userR = 1
@@ -255,8 +245,7 @@ def signup():
                 print("no la creo")
         else:
                 print("la creo")
-                crear_cookie_idioma()
-                lang = request.cookies.get('resultAppLang')
+                lang = 0
         
         if 'loggedin' in session:
                 return redirect("/dashboard", code=302)
@@ -274,7 +263,6 @@ def login():
                         return render_template('user/login.html', idioma=idioma[int(lang)])
                 else:
                         resp = make_response(render_template('user/login.html',  idioma=idioma[0]))
-                        resp.set_cookie('resultAppLang', '0', expires=expire_date)
                         return resp
 
 

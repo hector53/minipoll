@@ -219,8 +219,9 @@
 <script src="{{ url_for('static', filename='js/canvas.js') }}"></script>
 <script src="{{ url_for('static', filename='js/get_encuesta.js') }}"></script>
 <script>
+  var voteDone = '{{idioma.voteDone}}'
   $(".modal-button").click(function () {
-    console.log("asdasd")
+
     var target = $(this).data("target");
     $("html").addClass("is-clipped");
     $(target).addClass("is-active");

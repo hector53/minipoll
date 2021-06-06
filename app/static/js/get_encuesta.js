@@ -189,7 +189,7 @@ var app = new Vue({
             Swal.fire({
               position: 'center',
               icon: 'success',
-              title: 'Votación exitosa',
+              title: voteDone,
               showConfirmButton: false,
               timer: 1500
             })
